@@ -1,116 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Public Transport Data Visualization</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: sans-serif;
-        }
-        .chart-container {
-            width: 80%;
-            margin: 20px auto;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transport Data Visualization</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 0;
+      text-align: center;
+    }
+    canvas {
+      margin: 20px auto;
+      max-width: 800px;
+    }
+  </style>
 </head>
 <body>
+  <h1>Transport Data Visualization</h1>
+  
+  <canvas id="graph1"></canvas>
+  <canvas id="graph2"></canvas>
+  <canvas id="graph3"></canvas>
 
-    <h1>Public Transport Data</h1>
+  <script>
+    // Dataset
+    const data = [
+      { time: "Jan, 2010", population: 80, vehicles: 50, traffic: 15.0, perCapitaActual: 0.63, perCapitaExpected: 100 },
+      { time: "Feb, 2010", population: 80.15, vehicles: 50.2, traffic: 14.8, perCapitaActual: 0.63, perCapitaExpected: 100.125 },
+      { time: "Mar, 2010", population: 80.25, vehicles: 50.5, traffic: 15.2, perCapitaActual: 0.63, perCapitaExpected: 100.25 },
+      // Add all data rows here...
+    ];
 
-    <div class="chart-container">
-        <canvas id="populationVsVehicles"></canvas>
-    </div>
-    <div class="chart-container">
-        <canvas id="vehiclesVsTraffic"></canvas>
-    </div>
-    <div class="chart-container">
-        <canvas id="perCapitaVsExpected"></canvas>
-    </div>
+    // Extract required data for graphs
+    const labels = data.map(row => row.time);
+    const population = data.map(row => row.population);
+    const vehicles = data.map(row => row.vehicles);
+    const traffic = data.map(row => row.traffic);
+    const perCapitaActual = data.map(row => row.perCapitaActual);
+    const perCapitaExpected = data.map(row => row.perCapitaExpected);
 
-    <script>
-        const data = [
-            {Time:"Jan, 2010",Population:80,Vehicles:50,Traffic:15.00,ActualPerCapita:0.63,ExpectedPerCapita:100},
-{Time:"Feb, 2010",Population:80.1,Vehicles:50.2,Traffic:14.80,ActualPerCapita:0.63,ExpectedPerCapita:100.125},
-{Time:"Mar, 2010",Population:80.2,Vehicles:50.5,Traffic:15.20,ActualPerCapita:0.63,ExpectedPerCapita:100.25},
-{Time:"Apr, 2010",Population:80.3,Vehicles:51,Traffic:15.50,ActualPerCapita:0.64,ExpectedPerCapita:100.375},
-{Time:"May, 2010",Population:80.5,Vehicles:51.5,Traffic:16.00,ActualPerCapita:0.64,ExpectedPerCapita:100.625},
-{Time:"Jun, 2010",Population:80.7,Vehicles:52,Traffic:16.20,ActualPerCapita:0.64,ExpectedPerCapita:100.875},
-{Time:"Jul, 2010",Population:80.9,Vehicles:52.5,Traffic:17.00,ActualPerCapita:0.65,ExpectedPerCapita:101.125},
-{Time:"Aug, 2010",Population:81.1,Vehicles:53,Traffic:16.80,ActualPerCapita:0.65,ExpectedPerCapita:101.375},
-{Time:"Sep, 2010",Population:81.2,Vehicles:53.5,Traffic:16.50,ActualPerCapita:0.66,ExpectedPerCapita:101.5},
-{Time:"Oct, 2010",Population:81.4,Vehicles:54,Traffic:15.80,ActualPerCapita:0.66,ExpectedPerCapita:101.75},
-{Time:"Nov, 2010",Population:81.6,Vehicles:54.5,Traffic:15.60,ActualPerCapita:0.67,ExpectedPerCapita:102},
-{Time:"Dec, 2010",Population:81.8,Vehicles:55,Traffic:15.30,ActualPerCapita:0.67,ExpectedPerCapita:102.25},
-// ... (rest of your data)
-{Time:"Dec, 2024",Population:115.8,Vehicles:139.5,Traffic:12.79,ActualPerCapita:1.20,ExpectedPerCapita:144.75}
-        ];
+    // Graph 1: Population vs Vehicles
+    new Chart(document.getElementById('graph1'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Population (millions)',
+            data: population,
+            borderColor: 'blue',
+            fill: false
+          },
+          {
+            label: 'Vehicles (thousands)',
+            data: vehicles,
+            borderColor: 'green',
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'top' } },
+        scales: { x: { title: { display: true, text: 'Time' } }, y: { title: { display: true, text: 'Values' } } }
+      }
+    });
 
-        function createChart(canvasId, xData, yData, xLabel, yLabel, chartTitle) {
-            const ctx = document.getElementById(canvasId).getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: data.map(item => item.Time),
-                    datasets: [{
-                        label: chartTitle,
-                        data: yData,
-                        borderColor: 'blue',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        x: {
-                            display: true,
-                            title: {
-                                display: true,
-                                text: xLabel
-                            },
-                            ticks: {
-                                display: false // Hide x-axis labels for better readability if too many points
-                            }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            display: true,
-                            title: {
-                                display: true,
-                                text: yLabel
-                            }
-                        }
-                    }
-                }
-            });
-        }
+    // Graph 2: Vehicles vs Traffic
+    new Chart(document.getElementById('graph2'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Vehicles (thousands)',
+            data: vehicles,
+            borderColor: 'red',
+            fill: false
+          },
+          {
+            label: 'Traffic (millions/day)',
+            data: traffic,
+            borderColor: 'purple',
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'top' } },
+        scales: { x: { title: { display: true, text: 'Time' } }, y: { title: { display: true, text: 'Values' } } }
+      }
+    });
 
-        createChart(
-            'populationVsVehicles',
-            data.map(item => item.Population),
-            data.map(item => item.Vehicles),
-            'Population (millions)',
-            'Public Transport Vehicles (thousands)',
-            'Population vs. Vehicles'
-        );
-
-        createChart(
-            'vehiclesVsTraffic',
-            data.map(item => item.Vehicles),
-            data.map(item => item.Traffic),
-            'Public Transport Vehicles (thousands)',
-            'Traffic Numbers (millions/day)',
-            'Vehicles vs. Traffic'
-        );
-
-        createChart(
-            'perCapitaVsExpected',
-            data.map(item => item.ActualPerCapita),
-            data.map(item => item.ExpectedPerCapita),
-            'Public Transport Vehicles per Capita (Actual)',
-            'Public Transport Vehicles per Capita (MIN. Expected)',
-            'Per Capita vs. Expected'
-        );
-    </script>
-
+    // Graph 3: Per Capita (Actual vs Expected)
+    new Chart(document.getElementById('graph3'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Per Capita Actual',
+            data: perCapitaActual,
+            borderColor: 'orange',
+            fill: false
+          },
+          {
+            label: 'Per Capita Expected',
+            data: perCapitaExpected,
+            borderColor: 'brown',
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'top' } },
+        scales: { x: { title: { display: true, text: 'Time' } }, y: { title: { display: true, text: 'Values' } } }
+      }
+    });
+  </script>
 </body>
 </html>
