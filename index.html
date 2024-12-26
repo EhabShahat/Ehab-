@@ -42,7 +42,7 @@
     canvas {
       display: block;
       width: 90%;
-      height: auto;
+      height: 400px; /* Set a fixed height for the canvas */
       max-width: 800px;
       background: rgba(255, 255, 255, 0.05);  /* Darkened background for canvas */
       border-radius: 15px;
@@ -146,7 +146,7 @@
   <script>
     // Dataset
     const data = [
-     { "time": "Jan, 2010", "population": 80, "vehicles": 50, "traffic": 15.0, "perCapitaActual": 0.63, "perCapitaExpected": 100 },
+      { "time": "Jan, 2010", "population": 80, "vehicles": 50, "traffic": 15.0, "perCapitaActual": 0.63, "perCapitaExpected": 100 },
       { "time": "Feb, 2010", "population": 80.15, "vehicles": 50.2, "traffic": 14.8, "perCapitaActual": 0.63, "perCapitaExpected": 100.125 },
       { "time": "Mar, 2010", "population": 80.25, "vehicles": 50.5, "traffic": 15.2, "perCapitaActual": 0.63, "perCapitaExpected": 100.25 },
       { "time": "Apr, 2010", "population": 80.35, "vehicles": 51, "traffic": 15.5, "perCapitaActual": 0.64, "perCapitaExpected": 100.375 },
@@ -181,8 +181,7 @@
       { "time": "Sep, 2012", "population": 85.66, "vehicles": 66, "traffic": 17.0, "perCapitaActual": 0.77, "perCapitaExpected": 107 },
       { "time": "Oct, 2012", "population": 85.86, "vehicles": 66.5, "traffic": 16.7, "perCapitaActual": 0.78, "perCapitaExpected": 107.25 },
       { "time": "Nov, 2012", "population": 86.67, "vehicles": 67, "traffic": 16.5, "perCapitaActual": 0.78, "perCapitaExpected": 107.5 },
-      { "time": "Dec, 2012", "population": 86.26, "vehicles": 67.5, "traffic": 16.3, "perCapitaActual": 0.79, "perCapitaExpected": 107.75 },
-      { "time": "Jan, 2013", "population": 86.5, "vehicles": 68, "traffic": 16.0, "perCapitaActual": 0.79, "perCapitaExpected": 108.125 },
+      { "time": "Dec, 2012", "population": 86.26, "vehicles": 67.5, "traffic": 16.3, "perCapitaActual": 0.79, "perCapitaExpected": 107.75 },    
     ];
 
     // Extract required data for graphs
@@ -194,7 +193,7 @@
     const perCapitaExpected = data.map(row => row.perCapitaExpected);
 
     // Graph 1: Population vs Vehicles
-    new Chart(document.getElementById('graph1'), {
+    const chart1 = new Chart(document.getElementById('graph1'), {
       type: 'line',
       data: {
         labels,
@@ -221,7 +220,7 @@
         scales: { 
           x: { 
             title: { display: true, text: 'Time' },
-            grid: { color: '#333' } 
+            grid: { color: '#333' }
           },
           y: { 
             title: { display: true, text: 'Values' },
@@ -233,7 +232,7 @@
     });
 
     // Graph 2: Vehicles vs Traffic
-    new Chart(document.getElementById('graph2'), {
+    const chart2 = new Chart(document.getElementById('graph2'), {
       type: 'line',
       data: {
         labels,
@@ -271,7 +270,7 @@
       }
     });
 
-    // Graph 3: Per Capita (Actual vs Expected)
+        // Graph 3: Per Capita (Actual vs Expected)
     new Chart(document.getElementById('graph3'), {
       type: 'line',
       data: {
