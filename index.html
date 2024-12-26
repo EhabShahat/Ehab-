@@ -3,37 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transport Metrics Dashboard</title>
+    <title>Transportation Metrics Dashboard</title>
     
-    <!-- React and ReactDOM -->
+    <!-- Load React -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
     
-    <!-- Recharts -->
+    <!-- Load Recharts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.10.3/Recharts.min.js"></script>
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
     <style>
-        .recharts-wrapper {
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .dashboard {
+            max-width: 1200px;
             margin: 0 auto;
         }
-        .card {
+        .chart-container {
             background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            margin-bottom: 1rem;
-            padding: 1rem;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
+        h1 {
+            text-align: center;
+            color: #333;
         }
-        body {
-            background-color: #f3f4f6;
-            padding: 1rem;
+        h2 {
+            color: #444;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -45,17 +48,17 @@
             LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
         } = Recharts;
 
-        // Raw data string
-        const rawData = `Time Population(millions)Traffic Numbers(millions/day)Public TransportVehicles(thousands)Metro VehiclesVehicleOwnership(millions)Ride-SharingFleet (thousands)GDP Growth Rate(%)Average FuelPrice (EGP/Liter)EVs Share ofFleet (%)Public Transport Vehicles per Capita(actual)Public Transport Vehicles per Capita(MIN. Expected)
-Jan, 2010 80 15.00 50 100 5.5 0 5 4.5 0.2 0.63 100
-Feb, 2010 80.1 14.80 50.2 101 5.55 0 5 4.5 0.2 0.63 100.125
-Mar, 2010 80.2 15.20 50.5 102 5.6 0 5 4.6 0.2 0.63 100.25`;
-
-        // Process the data
-        const processData = (text) => {
-            const rows = text.split('\n').filter(row => row.trim());
-            return rows.map(row => {
+        // Parse data from the document
+        const parseData = (str) => {
+            const lines = str.trim().split('\n');
+            return lines.map(line => {
                 const [
+                    time, population, traffic, publicTransport, metroVehicles,
+                    vehicleOwnership, rideSharing, gdpGrowth, fuelPrice, evsShare,
+                    ptPerCapitaActual, ptPerCapitaExpected
+                ] = line.split(' ').map(val => isNaN(parseFloat(val)) ? val : parseFloat(val));
+                
+                return {
                     time,
                     population,
                     traffic,
@@ -68,107 +71,79 @@ Mar, 2010 80.2 15.20 50.5 102 5.6 0 5 4.6 0.2 0.63 100.25`;
                     evsShare,
                     ptPerCapitaActual,
                     ptPerCapitaExpected
-                ] = row.split(' ').filter(cell => cell.trim());
-
-                return {
-                    time,
-                    population: parseFloat(population),
-                    traffic: parseFloat(traffic),
-                    publicTransport: parseFloat(publicTransport),
-                    metroVehicles: parseFloat(metroVehicles),
-                    vehicleOwnership: parseFloat(vehicleOwnership),
-                    rideSharing: parseFloat(rideSharing),
-                    gdpGrowth: parseFloat(gdpGrowth),
-                    fuelPrice: parseFloat(fuelPrice),
-                    evsShare: parseFloat(evsShare),
-                    ptPerCapitaActual: parseFloat(ptPerCapitaActual),
-                    ptPerCapitaExpected: parseFloat(ptPerCapitaExpected)
                 };
             });
         };
 
+        const data = parseData(`Jan,2010 80 15.00 50 100 5.5 0 5 4.5 0.2 0.63 100
+Jan,2012 84 16.00 62 124 7.4 36 5 7 1.1 0.74 105
+Jan,2014 89 16.00 74 148 9.8 84 4.5 9.5 3.5 0.83 111.25
+Jan,2016 94 16.00 86 172 12.2 132 4.3 12 5.9 0.91 117.5
+Jan,2018 99 16.00 98 196 14.6 180 5 14.4 8.4 0.99 123.75
+Jan,2020 104 14.50 110 220 17 230 3.6 16.8 10.8 1.06 130
+Jan,2022 108.8 14.09 122 244 19.4 278 4.2 19.2 13.7 1.12 136
+Jan,2024 113.6 13.20 134 268 21.8 326 4.3 21.7 17.3 1.18 142`);
+
         const Dashboard = () => {
-            const data = processData(rawData);
-
-            return React.createElement('div', { className: 'max-w-7xl mx-auto' },
-                React.createElement('h1', { className: 'text-3xl font-bold mb-6 text-center' }, 'Transport Metrics Dashboard'),
-                React.createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-6' }, [
-                    // Traffic vs Public Transport
-                    React.createElement('div', { className: 'card', key: 'traffic' }, [
-                        React.createElement('h2', { className: 'card-title' }, 'Traffic Numbers vs Public Transport Vehicles'),
-                        React.createElement('div', { style: { height: '400px' } },
-                            React.createElement(ResponsiveContainer, { width: '100%', height: '100%' },
-                                React.createElement(LineChart, {  data }, [
-                                    React.createElement(CartesianGrid, { strokeDasharray: '3 3' }),
-                                    React.createElement(XAxis, { dataKey: 'time', angle: -45, textAnchor: 'end', height: 60 }),
-                                    React.createElement(YAxis, { yAxisId: 'left' }),
-                                    React.createElement(YAxis, { yAxisId: 'right', orientation: 'right' }),
-                                    React.createElement(Tooltip),
-                                    React.createElement(Legend),
-                                    React.createElement(Line, { yAxisId: 'left', type: 'monotone', dataKey: 'traffic', stroke: '#8884d8', name: 'Traffic (M/day)' }),
-                                    React.createElement(Line, { yAxisId: 'right', type: 'monotone', dataKey: 'publicTransport', stroke: '#82ca9d', name: 'Public Transport (K)' })
-                                ])
-                            )
+            return React.createElement('div', { className: 'dashboard' }, [
+                React.createElement('h1', { key: 'title' }, 'Transportation Metrics Dashboard'),
+                
+                // Question 1: Public Transport vs Population
+                React.createElement('div', { className: 'chart-container', key: 'chart1' }, [
+                    React.createElement('h2', null, 'Public Transport vs Population Growth'),
+                    React.createElement('div', { style: { width: '100%', height: 400 } },
+                        React.createElement(ResponsiveContainer, null,
+                            React.createElement(LineChart, {  data }, [
+                                React.createElement(CartesianGrid, { strokeDasharray: '3 3' }),
+                                React.createElement(XAxis, { dataKey: 'time' }),
+                                React.createElement(YAxis, { yAxisId: 'left', label: { value: 'Population (M)', angle: -90, position: 'insideLeft' } }),
+                                React.createElement(YAxis, { yAxisId: 'right', orientation: 'right', label: { value: 'Public Transport (K)', angle: 90, position: 'insideRight' } }),
+                                React.createElement(Tooltip),
+                                React.createElement(Legend),
+                                React.createElement(Line, { yAxisId: 'left', type: 'monotone', dataKey: 'population', stroke: '#8884d8', name: 'Population' }),
+                                React.createElement(Line, { yAxisId: 'right', type: 'monotone', dataKey: 'publicTransport', stroke: '#82ca9d', name: 'Public Transport' })
+                            ])
                         )
-                    ]),
+                    )
+                ]),
 
-                    // Vehicle Ownership and Ride Sharing
-                    React.createElement('div', { className: 'card', key: 'vehicles' }, [
-                        React.createElement('h2', { className: 'card-title' }, 'Vehicle Ownership vs Ride Sharing Fleet'),
-                        React.createElement('div', { style: { height: '400px' } },
-                            React.createElement(ResponsiveContainer, { width: '100%', height: '100%' },
-                                React.createElement(LineChart, {  data }, [
-                                    React.createElement(CartesianGrid, { strokeDasharray: '3 3' }),
-                                    React.createElement(XAxis, { dataKey: 'time', angle: -45, textAnchor: 'end', height: 60 }),
-                                    React.createElement(YAxis, { yAxisId: 'left' }),
-                                    React.createElement(YAxis, { yAxisId: 'right', orientation: 'right' }),
-                                    React.createElement(Tooltip),
-                                    React.createElement(Legend),
-                                    React.createElement(Line, { yAxisId: 'left', type: 'monotone', dataKey: 'vehicleOwnership', stroke: '#ff7300', name: 'Vehicle Ownership (M)' }),
-                                    React.createElement(Line, { yAxisId: 'right', type: 'monotone', dataKey: 'rideSharing', stroke: '#00c49f', name: 'Ride Sharing Fleet (K)' })
-                                ])
-                            )
+                // Question 2: Traffic Numbers vs Public Transport
+                React.createElement('div', { className: 'chart-container', key: 'chart2' }, [
+                    React.createElement('h2', null, 'Traffic Numbers vs Public Transport'),
+                    React.createElement('div', { style: { width: '100%', height: 400 } },
+                        React.createElement(ResponsiveContainer, null,
+                            React.createElement(LineChart, {  data }, [
+                                React.createElement(CartesianGrid, { strokeDasharray: '3 3' }),
+                                React.createElement(XAxis, { dataKey: 'time' }),
+                                React.createElement(YAxis, { yAxisId: 'left', label: { value: 'Traffic (M/day)', angle: -90, position: 'insideLeft' } }),
+                                React.createElement(YAxis, { yAxisId: 'right', orientation: 'right', label: { value: 'Public Transport (K)', angle: 90, position: 'insideRight' } }),
+                                React.createElement(Tooltip),
+                                React.createElement(Legend),
+                                React.createElement(Line, { yAxisId: 'left', type: 'monotone', dataKey: 'traffic', stroke: '#ff7300', name: 'Traffic' }),
+                                React.createElement(Line, { yAxisId: 'right', type: 'monotone', dataKey: 'publicTransport', stroke: '#82ca9d', name: 'Public Transport' })
+                            ])
                         )
-                    ]),
+                    )
+                ]),
 
-                    // EVs Share and Fuel Price
-                    React.createElement('div', { className: 'card', key: 'evs' }, [
-                        React.createElement('h2', { className: 'card-title' }, 'EVs Share vs Fuel Price'),
-                        React.createElement('div', { style: { height: '400px' } },
-                            React.createElement(ResponsiveContainer, { width: '100%', height: '100%' },
-                                React.createElement(LineChart, {  data }, [
-                                    React.createElement(CartesianGrid, { strokeDasharray: '3 3' }),
-                                    React.createElement(XAxis, { dataKey: 'time', angle: -45, textAnchor: 'end', height: 60 }),
-                                    React.createElement(YAxis, { yAxisId: 'left' }),
-                                    React.createElement(YAxis, { yAxisId: 'right', orientation: 'right' }),
-                                    React.createElement(Tooltip),
-                                    React.createElement(Legend),
-                                    React.createElement(Line, { yAxisId: 'left', type: 'monotone', dataKey: 'evsShare', stroke: '#8884d8', name: 'EVs Share (%)' }),
-                                    React.createElement(Line, { yAxisId: 'right', type: 'monotone', dataKey: 'fuelPrice', stroke: '#82ca9d', name: 'Fuel Price (EGP/L)' })
-                                ])
-                            )
+                // Public Transport per Capita
+                React.createElement('div', { className: 'chart-container', key: 'chart3' }, [
+                    React.createElement('h2', null, 'Public Transport per Capita: Actual vs Expected'),
+                    React.createElement('div', { style: { width: '100%', height: 400 } },
+                        React.createElement(ResponsiveContainer, null,
+                            React.createElement(LineChart, {  data }, [
+                                React.createElement(CartesianGrid, { strokeDasharray: '3 3' }),
+                                React.createElement(XAxis, { dataKey: 'time' }),
+                                React.createElement(YAxis, { label: { value: 'Vehicles per Capita', angle: -90, position: 'insideLeft' } }),
+                                React.createElement(Tooltip),
+                                React.createElement(Legend),
+                                React.createElement(Line, { type: 'monotone', dataKey: 'ptPerCapitaActual', stroke: '#8884d8', name: 'Actual' }),
+                                React.createElement(Line, { type: 'monotone', dataKey: 'ptPerCapitaExpected', stroke: '#82ca9d', name: 'Expected' })
+                            ])
                         )
-                    ]),
-
-                    // Public Transport per Capita
-                    React.createElement('div', { className: 'card', key: 'capita' }, [
-                        React.createElement('h2', { className: 'card-title' }, 'Public Transport per Capita: Actual vs Expected'),
-                        React.createElement('div', { style: { height: '400px' } },
-                            React.createElement(ResponsiveContainer, { width: '100%', height: '100%' },
-                                React.createElement(LineChart, {  data }, [
-                                    React.createElement(CartesianGrid, { strokeDasharray: '3 3' }),
-                                    React.createElement(XAxis, { dataKey: 'time', angle: -45, textAnchor: 'end', height: 60 }),
-                                    React.createElement(YAxis),
-                                    React.createElement(Tooltip),
-                                    React.createElement(Legend),
-                                    React.createElement(Line, { type: 'monotone', dataKey: 'ptPerCapitaActual', stroke: '#8884d8', name: 'Actual' }),
-                                    React.createElement(Line, { type: 'monotone', dataKey: 'ptPerCapitaExpected', stroke: '#82ca9d', name: 'Expected' })
-                                ])
-                            )
-                        )
-                    ])
+                    )
                 ])
-            );
+            ]);
         };
 
         // Render the app
