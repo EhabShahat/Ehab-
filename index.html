@@ -3,76 +3,167 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Transport Data Visualization</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Transport Data Analytics</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
   <style>
-    /* General Reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    /* Body Styling */
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #00c6ff, #0072ff); /* Gradient background */
-      color: #ffffff;  /* White text */
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      background-color: #111827;
+      color: #e5e7eb;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
       text-align: center;
-      padding: 20px;
+      margin-bottom: 3rem;
     }
 
-    h1 {
+    .header h1 {
       font-size: 2.5rem;
-      margin-bottom: 20px;
       font-weight: 700;
-      letter-spacing: 2px;
+      background: linear-gradient(45deg, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
     }
 
-    /* Canvas Styling */
-    canvas {
-      display: block;
-      width: 90%;  /* Use 90% of the screen width */
-      height: auto;
-      max-width: 1200px;  /* Maximum width for large screens */
-      background: rgba(255, 255, 255, 0.1);  /* Subtle background with transparency */
-      border-radius: 15px;  /* Rounded corners */
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for 3D effect */
-      transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Smooth animation on hover */
+    .header p {
+      color: #9ca3af;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    /* Hover effect for canvas */
-    canvas:hover {
-      transform: scale(1.05);  /* Slight zoom effect */
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
     }
 
-    /* Make the page responsive */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
+    .chart-container {
+      background: #1f2937;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease;
+    }
+
+    .chart-container:hover {
+      transform: translateY(-5px);
+    }
+
+    .chart-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #e5e7eb;
+    }
+
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
       }
+    }
 
-      canvas {
-        width: 100%;  /* Full width on smaller screens */
+    @media (min-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
   </style>
 </head>
 <body>
-  <h1>Transport Data Visualization</h1>
-  
-  <canvas id="graph1"></canvas>
-  <canvas id="graph2"></canvas>
-  <canvas id="graph3"></canvas>
+  <div class="container">
+    <div class="header">
+      <h1>Transport Analytics Dashboard</h1>
+      <p>Comprehensive visualization of population, vehicle, and traffic trends from 2010 to 2024</p>
+    </div>
+    
+    <div class="grid">
+      <div class="chart-container">
+        <h2 class="chart-title">Population vs Vehicles</h2>
+        <canvas id="graph1"></canvas>
+      </div>
+      
+      <div class="chart-container">
+        <h2 class="chart-title">Traffic Analysis</h2>
+        <canvas id="graph2"></canvas>
+      </div>
+      
+      <div class="chart-container">
+        <h2 class="chart-title">Per Capita Comparison</h2>
+        <canvas id="graph3"></canvas>
+      </div>
+    </div>
+  </div>
 
   <script>
+    // Theme configuration for all charts
+    Chart.defaults.color = '#e5e7eb';
+    Chart.defaults.borderColor = '#374151';
+    
+    const chartConfig = {
+      responsive: true,
+      interaction: {
+        mode: 'index',
+        intersect: false,
+      },
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            padding: 20,
+            font: {
+              family: "'Inter', sans-serif",
+              size: 12
+            }
+          }
+        },
+        tooltip: {
+          backgroundColor: '#1f2937',
+          titleFont: {
+            family: "'Inter', sans-serif",
+            size: 14
+          },
+          bodyFont: {
+            family: "'Inter', sans-serif",
+            size: 13
+          },
+          padding: 12,
+          cornerRadius: 8
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            maxRotation: 45,
+            minRotation: 45
+          }
+        },
+        y: {
+          grid: {
+            color: '#374151'
+          }
+        }
+      }
+    };
+
     // Dataset
+    
     const data = [
   { "time": "Jan, 2010", "population": 80, "vehicles": 50, "traffic": 15.0, "perCapitaActual": 0.63, "perCapitaExpected": 100 },
   { "time": "Feb, 2010", "population": 80.15, "vehicles": 50.2, "traffic": 14.8, "perCapitaActual": 0.63, "perCapitaExpected": 100.125 },
@@ -256,93 +347,71 @@
   { "time": "Dec, 2024", "population": 115.81, "vehicles": 144.5, "traffic": 12.3, "perCapitaActual": 1.2, "perCapitaExpected": 144.75 },
     ];
 
-    // Extract required data for graphs
     const labels = data.map(row => row.time);
-    const population = data.map(row => row.population);
-    const vehicles = data.map(row => row.vehicles);
-    const traffic = data.map(row => row.traffic);
-    const perCapitaActual = data.map(row => row.perCapitaActual);
-    const perCapitaExpected = data.map(row => row.perCapitaExpected);
-
+    
     // Graph 1: Population vs Vehicles
     new Chart(document.getElementById('graph1'), {
       type: 'line',
-      data: {
+       {
         labels,
-        datasets: [
-          {
-            label: 'Population (millions)',
-            data: population,
-            borderColor: 'blue',
-            fill: false
-          },
-          {
-            label: 'Vehicles (thousands)',
-            data: vehicles,
-            borderColor: 'green',
-            fill: false
-          }
-        ]
+        datasets: [{
+          label: 'Population',
+           data.map(row => row.population),
+          borderColor: '#60a5fa',
+          backgroundColor: '#60a5fa20',
+          fill: true,
+          tension: 0.4
+        }, {
+          label: 'Vehicles',
+           data.map(row => row.vehicles),
+          borderColor: '#34d399',
+          backgroundColor: '#34d39920',
+          fill: true,
+          tension: 0.4
+        }]
       },
-      options: {
-        responsive: true,
-        plugins: { legend: { position: 'top' } },
-        scales: { x: { title: { display: true, text: 'Time' } }, y: { title: { display: true, text: 'Values' } } }
-      }
+      options: chartConfig
     });
 
-    // Graph 2: Vehicles vs Traffic
+    // Graph 2: Traffic Analysis
     new Chart(document.getElementById('graph2'), {
       type: 'line',
       data: {
         labels,
-        datasets: [
-          {
-            label: 'Vehicles (thousands)',
-            data: vehicles,
-            borderColor: 'red',
-            fill: false
-          },
-          {
-            label: 'Traffic (millions/day)',
-            data: traffic,
-            borderColor: 'purple',
-            fill: false
-          }
-        ]
+        datasets: [{
+          label: 'Traffic',
+           data.map(row => row.traffic),
+          borderColor: '#f472b6',
+          backgroundColor: '#f472b620',
+          fill: true,
+          tension: 0.4
+        }]
       },
-      options: {
-        responsive: true,
-        plugins: { legend: { position: 'top' } },
-        scales: { x: { title: { display: true, text: 'Time' } }, y: { title: { display: true, text: 'Values' } } }
-      }
+      options: chartConfig
     });
 
-    // Graph 3: Per Capita (Actual vs Expected)
+    // Graph 3: Per Capita Comparison
     new Chart(document.getElementById('graph3'), {
       type: 'line',
-      data: {
+       {
         labels,
-        datasets: [
-          {
-            label: 'Per Capita Actual',
-            data: perCapitaActual,
-            borderColor: 'orange',
-            fill: false
-          },
-          {
-            label: 'Per Capita Expected',
-            data: perCapitaExpected,
-            borderColor: 'brown',
-            fill: false
-          }
-        ]
+        datasets: [{
+          label: 'Actual',
+           data.map(row => row.perCapitaActual),
+          borderColor: '#fbbf24',
+          backgroundColor: '#fbbf2420',
+          fill: true,
+          tension: 0.4
+        }, {
+          label: 'Expected',
+           data.map(row => row.perCapitaExpected),
+          borderColor: '#fb7185',
+          backgroundColor: '#fb718520',
+          fill: true,
+          tension: 0.4
+        }]
       },
-      options: {
-        responsive: true,
-        plugins: { legend: { position: 'top' } },
-        scales: { x: { title: { display: true, text: 'Time' } }, y: { title: { display: true, text: 'Values' } } }
-      }
+      options: chartConfig
     });
   </script>
 </body>
