@@ -1,184 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Charts Comparison</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Public Transport Data Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        .chart-container {
+            width: 80%;
+            margin: 20px auto;
+        }
+    </style>
 </head>
 <body>
-  <h1>Chart Comparisons</h1>
 
-  <canvas id="lineChart1" width="400" height="200"></canvas>
-  <canvas id="lineChart2" width="400" height="200"></canvas>
-  <canvas id="lineChart3" width="400" height="200"></canvas> <!-- New Chart for Vehicles per Capita -->
+    <h1>Public Transport Data</h1>
 
-  <script>
-    // Labels for months (used for all graphs)
-    const labels = [
-      'Jan-2010', 'Feb-2010', 'Mar-2010', 'Apr-2010', 'May-2010', 'Jun-2010', 
-      'Jul-2010', 'Aug-2010', 'Sep-2010', 'Oct-2010', 'Nov-2010', 'Dec-2010',
-      'Jan-2011', 'Feb-2011', 'Mar-2011', 'Apr-2011', 'May-2011', 'Jun-2011',
-      'Jul-2011', 'Aug-2011', 'Sep-2011', 'Oct-2011', 'Nov-2011', 'Dec-2011',
-      'Jan-2012', 'Feb-2012', 'Mar-2012', 'Apr-2012', 'May-2012', 'Jun-2012',
-      'Jul-2012', 'Aug-2012', 'Sep-2012', 'Oct-2012', 'Nov-2012', 'Dec-2012',
-      'Jan-2013', 'Feb-2013', 'Mar-2013', 'Apr-2013', 'May-2013', 'Jun-2013',
-      'Jul-2013', 'Aug-2013', 'Sep-2013', 'Oct-2013', 'Nov-2013', 'Dec-2013',
-      'Jan-2014', 'Feb-2014', 'Mar-2014', 'Apr-2014', 'May-2014', 'Jun-2014',
-      'Jul-2014', 'Aug-2014', 'Sep-2014', 'Oct-2014', 'Nov-2014', 'Dec-2014',
-      'Jan-2015', 'Feb-2015', 'Mar-2015', 'Apr-2015', 'May-2015', 'Jun-2015',
-      'Jul-2015', 'Aug-2015', 'Sep-2015', 'Oct-2015', 'Nov-2015', 'Dec-2015',
-      'Jan-2016', 'Feb-2016', 'Mar-2016', 'Apr-2016', 'May-2016', 'Jun-2016',
-      'Jul-2016', 'Aug-2016', 'Sep-2016', 'Oct-2016', 'Nov-2016', 'Dec-2016',
-      'Jan-2017', 'Feb-2017', 'Mar-2017', 'Apr-2017', 'May-2017', 'Jun-2017',
-      'Jul-2017', 'Aug-2017', 'Sep-2017', 'Oct-2017', 'Nov-2017', 'Dec-2017',
-      'Jan-2018', 'Feb-2018', 'Mar-2018', 'Apr-2018', 'May-2018', 'Jun-2018',
-      'Jul-2018', 'Aug-2018', 'Sep-2018', 'Oct-2018', 'Nov-2018', 'Dec-2018',
-      'Jan-2019', 'Feb-2019', 'Mar-2019', 'Apr-2019', 'May-2019', 'Jun-2019',
-      'Jul-2019', 'Aug-2019', 'Sep-2019', 'Oct-2019', 'Nov-2019', 'Dec-2019',
-      'Jan-2020', 'Feb-2020', 'Mar-2020', 'Apr-2020', 'May-2020', 'Jun-2020',
-      'Jul-2020', 'Aug-2020', 'Sep-2020', 'Oct-2020', 'Nov-2020', 'Dec-2020',
-      'Jan-2021', 'Feb-2021', 'Mar-2021', 'Apr-2021', 'May-2021', 'Jun-2021',
-      'Jul-2021', 'Aug-2021', 'Sep-2021', 'Oct-2021', 'Nov-2021', 'Dec-2021',
-      'Jan-2022', 'Feb-2022', 'Mar-2022', 'Apr-2022', 'May-2022', 'Jun-2022',
-      'Jul-2022', 'Aug-2022', 'Sep-2022', 'Oct-2022', 'Nov-2022', 'Dec-2022',
-      'Jan-2023', 'Feb-2023', 'Mar-2023', 'Apr-2023', 'May-2023', 'Jun-2023',
-      'Jul-2023', 'Aug-2023', 'Sep-2023', 'Oct-2023', 'Nov-2023', 'Dec-2023',
-      'Jan-2024', 'Feb-2024', 'Mar-2024', 'Apr-2024', 'May-2024', 'Jun-2024',
-      'Jul-2024', 'Aug-2024', 'Sep-2024', 'Oct-2024', 'Nov-2024', 'Dec-2024'
-    ];
+    <div class="chart-container">
+        <canvas id="populationVsVehicles"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="vehiclesVsTraffic"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="perCapitaVsExpected"></canvas>
+    </div>
 
-    // Public Transport Vehicles per Capita (Actual) data
-    const transportVehiclesPerCapitaActual = [
-      0.63, 0.63, 0.63, 0.64, 0.64, 0.64, 0.65, 0.65, 0.66, 0.66, 0.67, 0.67,
-      0.68, 0.69, 0.69, 0.70, 0.70, 0.71, 0.71, 0.72, 0.72, 0.72, 0.73, 0.73,
-      0.74, 0.74, 0.75, 0.75, 0.75, 0.76, 0.76, 0.77, 0.77, 0.78, 0.78, 0.78,
-      0.79, 0.79, 0.79, 0.80, 0.80, 0.81, 0.81, 0.81, 0.82, 0.82, 0.82, 0.83,
-      0.83, 0.84, 0.84, 0.84, 0.85, 0.85, 0.85, 0.86, 0.86, 0.86, 0.87, 0.87,
-      0.87, 0.88, 0.88, 0.88, 0.89, 0.89, 0.90, 0.90, 0.90, 0.91, 0.91, 0.91,
-      0.91, 0.92, 0.92, 0.92, 0.92, 0.93, 0.93, 0.93, 0.94, 0.94, 0.94, 0.94,
-      0.95, 0.95, 0.95, 0.95, 0.96, 0.96, 0.96, 0.96, 0.97, 0.97, 0.97, 0.98,
-      0.98, 0.98, 0.98, 0.99, 0.99, 0.99, 1.00, 1.00, 1.00, 1.01, 1.01, 1.01,
-      1.01, 1.02, 1.02, 1.02, 1.03, 1.03, 1.03, 1.03, 1.04, 1.04, 1.04, 1.05,
-      1.05, 1.05, 1.05, 1.06, 1.06, 1.06, 1.06, 1.07, 1.07, 1.07, 1.07, 1.08,
-      1.08, 1.08, 1.08, 1.09, 1.09, 1.09, 1.10, 1.10, 1.10, 1.10, 1.11, 1.11,
-      1.11, 1.11, 1.11, 1.12, 1.12, 1.12, 1.12, 1.12, 1.13, 1.13, 1.13, 1.13,
-      1.14, 1.14, 1.14, 1.14, 1.15, 1.15, 1.15, 1.15, 1.15, 1.16, 1.16, 1.16,
-      1.16, 1.16, 1.17, 1.17, 1.17, 1.17, 1.17, 1.18, 1.18, 1.18, 1.18, 1.19,
-      1.19, 1.19, 1.19, 1.20, 1.20, 1.20, 1.20
-    ];
+    <script>
+        const data = [
+            {Time:"Jan, 2010",Population:80,Vehicles:50,Traffic:15.00,ActualPerCapita:0.63,ExpectedPerCapita:100},
+{Time:"Feb, 2010",Population:80.1,Vehicles:50.2,Traffic:14.80,ActualPerCapita:0.63,ExpectedPerCapita:100.125},
+{Time:"Mar, 2010",Population:80.2,Vehicles:50.5,Traffic:15.20,ActualPerCapita:0.63,ExpectedPerCapita:100.25},
+{Time:"Apr, 2010",Population:80.3,Vehicles:51,Traffic:15.50,ActualPerCapita:0.64,ExpectedPerCapita:100.375},
+{Time:"May, 2010",Population:80.5,Vehicles:51.5,Traffic:16.00,ActualPerCapita:0.64,ExpectedPerCapita:100.625},
+{Time:"Jun, 2010",Population:80.7,Vehicles:52,Traffic:16.20,ActualPerCapita:0.64,ExpectedPerCapita:100.875},
+{Time:"Jul, 2010",Population:80.9,Vehicles:52.5,Traffic:17.00,ActualPerCapita:0.65,ExpectedPerCapita:101.125},
+{Time:"Aug, 2010",Population:81.1,Vehicles:53,Traffic:16.80,ActualPerCapita:0.65,ExpectedPerCapita:101.375},
+{Time:"Sep, 2010",Population:81.2,Vehicles:53.5,Traffic:16.50,ActualPerCapita:0.66,ExpectedPerCapita:101.5},
+{Time:"Oct, 2010",Population:81.4,Vehicles:54,Traffic:15.80,ActualPerCapita:0.66,ExpectedPerCapita:101.75},
+{Time:"Nov, 2010",Population:81.6,Vehicles:54.5,Traffic:15.60,ActualPerCapita:0.67,ExpectedPerCapita:102},
+{Time:"Dec, 2010",Population:81.8,Vehicles:55,Traffic:15.30,ActualPerCapita:0.67,ExpectedPerCapita:102.25},
+// ... (rest of your data)
+{Time:"Dec, 2024",Population:115.8,Vehicles:139.5,Traffic:12.79,ActualPerCapita:1.20,ExpectedPerCapita:144.75}
+        ];
 
-    // Public Transport Vehicles per Capita (MIN. Expected) data
-    const publicTransportVehiclesMinExpected = [
-      100, 100.125, 100.25, 100.375, 100.625, 100.875, 101.125, 101.375, 101.5, 101.75, 102, 102.25,
-      102.5, 102.625, 102.875, 103, 103.25, 103.5, 103.75, 104, 104.125, 104.375, 104.625, 104.875,
-      105, 105.25, 105.5, 105.75, 106, 106.25, 106.5, 106.75, 107, 107.25, 107.5, 107.75, 108.125, 
-      108.375, 108.625, 108.875, 109.125, 109.375, 109.625, 109.875, 110.125, 110.375, 110.625, 110.875, 
-      111.25, 111.5, 111.75, 112, 112.25, 112.5, 112.75, 113, 113.25, 113.5, 113.75, 114, 114.375, 
-      114.625, 114.875, 115.125, 115.375, 115.625, 115.875, 116.125, 116.375, 116.625, 116.875, 
-      117.125, 117.5, 117.75, 118, 118.25, 118.5, 118.75, 119, 119.25, 119.5, 119.75, 120, 120.25, 
-      120.625, 120.875, 121.125, 121.375, 121.625, 121.875, 122.125, 122.375, 122.625, 122.875, 
-      123.125, 123.375, 123.75, 124, 124.25, 124.5, 124.75, 125, 125.25, 125.5, 125.75, 126, 126.25, 
-      126.5, 126.75, 127, 127.25, 127.5, 127.75, 128, 128.25, 128.5, 128.75, 129, 129.25, 129.5, 
-      130, 130.25, 130.5, 130.75, 131, 131.25, 131.5, 131.75, 132, 132.25, 132.5, 132.75, 133, 
-      133.25, 133.5, 133.75, 134, 134.25, 134.5, 134.75, 135, 135.25, 135.5, 135.75, 136, 136.25,
-      136.5, 136.75, 137, 137.25, 137.5, 137.75, 138, 138.25, 138.5, 138.75, 139, 139.25, 139.5, 
-      139.75, 140, 140.25, 140.5, 140.75, 141, 141.25, 141.5, 141.75, 142, 142.25, 142.5, 142.75, 
-      143, 143.25, 143.5, 143.75, 144, 144.25, 144.5, 144.75
-    ];
+        function createChart(canvasId, xData, yData, xLabel, yLabel, chartTitle) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map(item => item.Time),
+                    datasets: [{
+                        label: chartTitle,
+                        data: yData,
+                        borderColor: 'blue',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: xLabel
+                            },
+                            ticks: {
+                                display: false // Hide x-axis labels for better readability if too many points
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            display: true,
+                            title: {
+                                display: true,
+                                text: yLabel
+                            }
+                        }
+                    }
+                }
+            });
+        }
 
-    // Chart 1: Transport Vehicles per Capita (Actual) vs. Public Transport Vehicles per Capita (Actual)
-    const ctx1 = document.getElementById('lineChart1').getContext('2d');
-    const lineChart1 = new Chart(ctx1, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Transport Vehicles per Capita (Actual)',
-            data: transportVehiclesPerCapitaActual,
-            borderColor: 'rgba(255, 99, 132, 1)',
-            fill: false
-          },
-          {
-            label: 'Public Transport Vehicles per Capita (Actual)',
-            data: publicTransportVehiclesMinExpected,
-            borderColor: 'rgba(54, 162, 235, 1)',
-            fill: false
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-        },
-      }
-    });
+        createChart(
+            'populationVsVehicles',
+            data.map(item => item.Population),
+            data.map(item => item.Vehicles),
+            'Population (millions)',
+            'Public Transport Vehicles (thousands)',
+            'Population vs. Vehicles'
+        );
 
-    // Chart 2: Public Transport Vehicles per Capita (MIN. Expected) vs. Public Transport Vehicles per Capita (Actual)
-    const ctx2 = document.getElementById('lineChart2').getContext('2d');
-    const lineChart2 = new Chart(ctx2, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Public Transport Vehicles per Capita (Actual)',
-            data: transportVehiclesPerCapitaActual,
-            borderColor: 'rgba(255, 99, 132, 1)',
-            fill: false
-          },
-          {
-            label: 'Public Transport Vehicles per Capita (MIN. Expected)',
-            data: publicTransportVehiclesMinExpected,
-            borderColor: 'rgba(54, 162, 235, 1)',
-            fill: false
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-        },
-      }
-    });
+        createChart(
+            'vehiclesVsTraffic',
+            data.map(item => item.Vehicles),
+            data.map(item => item.Traffic),
+            'Public Transport Vehicles (thousands)',
+            'Traffic Numbers (millions/day)',
+            'Vehicles vs. Traffic'
+        );
 
-    // New Graph 3: Transport Vehicles per Capita vs. Public Transport Vehicles per Capita (MIN. Expected)
-    const ctx3 = document.getElementById('lineChart3').getContext('2d');
-    const lineChart3 = new Chart(ctx3, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Transport Vehicles per Capita (Actual)',
-            data: transportVehiclesPerCapitaActual,
-            borderColor: 'rgba(255, 159, 64, 1)', 
-            fill: false
-          },
-          {
-            label: 'Public Transport Vehicles per Capita (MIN. Expected)',
-            data: publicTransportVehiclesMinExpected,
-            borderColor: 'rgba(75, 192, 192, 1)', 
-            fill: false
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-        },
-      }
-    });
-  </script>
+        createChart(
+            'perCapitaVsExpected',
+            data.map(item => item.ActualPerCapita),
+            data.map(item => item.ExpectedPerCapita),
+            'Public Transport Vehicles per Capita (Actual)',
+            'Public Transport Vehicles per Capita (MIN. Expected)',
+            'Per Capita vs. Expected'
+        );
+    </script>
+
 </body>
 </html>
