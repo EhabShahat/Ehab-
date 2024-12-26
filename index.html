@@ -13,8 +13,11 @@
       text-align: center;
     }
     canvas {
-      margin: 20px auto;
-      max-width: 2000px;
+      display: block;
+      width: 100%;  /* Makes the canvas span the entire width of the screen */
+      height: auto;  /* Adjusts the height based on the width */
+      max-width: 100%;  /* Ensures the canvas doesn't overflow horizontally */
+      margin: 20px auto;  /* Centers the canvas horizontally with 20px top and bottom margins */
     }
   </style>
 </head>
