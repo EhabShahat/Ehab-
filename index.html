@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Transport Data Visualization</title>
+  <title>Fake Egypt Transport System</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     /* General Reset */
@@ -35,6 +35,14 @@
       color: #00c6ff; /* Bright color for header */
       margin-bottom: 30px;
       text-transform: uppercase;
+    }
+    h2 {
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      color: #00c6ff; /* Bright color for header */
+      margin-bottom: 30px;
+      text-transform: lowercase;
     }
 
     /* Canvas Styling */
@@ -123,15 +131,17 @@
   </style>
 </head>
 <body>
-  <h1>Transport Data Visualization</h1>
-
+  <h1>NEGY Transport Visualization</h1>
+  <h2>Does the growth in public transport vehicles keep pace with population growth?</h2>
   <div class="graph-container">
     <div class="canvas-wrapper">
       <canvas id="graph1" onclick="openPopup('graph1')"></canvas>
     </div>
+    <h2>How do the number of public transport vehicles correlate with the traffic numbers?</h2>
     <div class="canvas-wrapper">
       <canvas id="graph2" onclick="openPopup('graph2')"></canvas>
     </div>
+    <h2>Is the number of public transport vehicles sufficient, and what should the minimum requirement be?</h2>
     <div class="canvas-wrapper">
       <canvas id="graph3" onclick="openPopup('graph3')"></canvas>
     </div>
