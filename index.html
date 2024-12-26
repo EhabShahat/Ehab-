@@ -48,6 +48,7 @@
       border-radius: 15px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* More prominent shadow for modern look */
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 30px; /* Space between canvas elements */
     }
 
     /* Hover effect for canvas */
@@ -60,9 +61,9 @@
     .graph-container {
       width: 100%;
       max-width: 1300px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      display: flex;
+      flex-direction: column; /* Stack charts vertically */
+      gap: 30px; /* Space between the charts */
       justify-content: center;
       align-items: center;
     }
@@ -105,44 +106,44 @@
 
   <script>
     // Dataset
-    const data = [
-      { "time": "Jan, 2010", "population": 80, "vehicles": 50, "traffic": 15.0, "perCapitaActual": 0.63, "perCapitaExpected": 100 },
-      { "time": "Feb, 2010", "population": 80.15, "vehicles": 50.2, "traffic": 14.8, "perCapitaActual": 0.63, "perCapitaExpected": 100.125 },
-      { "time": "Mar, 2010", "population": 80.25, "vehicles": 50.5, "traffic": 15.2, "perCapitaActual": 0.63, "perCapitaExpected": 100.25 },
-      { "time": "Apr, 2010", "population": 80.35, "vehicles": 51, "traffic": 15.5, "perCapitaActual": 0.64, "perCapitaExpected": 100.375 },
-      { "time": "May, 2010", "population": 80.55, "vehicles": 51.5, "traffic": 16.0, "perCapitaActual": 0.64, "perCapitaExpected": 100.625 },
-      { "time": "Jun, 2010", "population": 80.75, "vehicles": 52, "traffic": 16.2, "perCapitaActual": 0.64, "perCapitaExpected": 100.875 },
-      { "time": "Jul, 2010", "population": 80.95, "vehicles": 52.5, "traffic": 17.0, "perCapitaActual": 0.65, "perCapitaExpected": 101.125 },
-      { "time": "Aug, 2010", "population": 81.15, "vehicles": 53, "traffic": 16.8, "perCapitaActual": 0.65, "perCapitaExpected": 101.375 },
-      { "time": "Sep, 2010", "population": 81.25, "vehicles": 53.5, "traffic": 16.5, "perCapitaActual": 0.66, "perCapitaExpected": 101.5 },
-      { "time": "Oct, 2010", "population": 81.45, "vehicles": 54, "traffic": 15.8, "perCapitaActual": 0.66, "perCapitaExpected": 101.75 },
-      { "time": "Nov, 2010", "population": 81.65, "vehicles": 54.5, "traffic": 15.6, "perCapitaActual": 0.67, "perCapitaExpected": 102 },
-      { "time": "Dec, 2010", "population": 81.85, "vehicles": 55, "traffic": 15.3, "perCapitaActual": 0.67, "perCapitaExpected": 102.25 },
-      { "time": "Jan, 2011", "population": 82.56, "vehicles": 56, "traffic": 15.5, "perCapitaActual": 0.68, "perCapitaExpected": 102.5 },
-      { "time": "Feb, 2011", "population": 82.15, "vehicles": 56.5, "traffic": 15.7, "perCapitaActual": 0.69, "perCapitaExpected": 102.625 },
-      { "time": "Mar, 2011", "population": 82.35, "vehicles": 57, "traffic": 16.0, "perCapitaActual": 0.69, "perCapitaExpected": 102.875 },
-      { "time": "Apr, 2011", "population": 82.45, "vehicles": 57.5, "traffic": 16.3, "perCapitaActual": 0.70, "perCapitaExpected": 103 },
-      { "time": "May, 2011", "population": 82.65, "vehicles": 58, "traffic": 16.5, "perCapitaActual": 0.70, "perCapitaExpected": 103.25 },
-      { "time": "Jun, 2011", "population": 82.85, "vehicles": 58.5, "traffic": 16.8, "perCapitaActual": 0.71, "perCapitaExpected": 103.5 },
-      { "time": "Jul, 2011", "population": 83.59, "vehicles": 59, "traffic": 17.0, "perCapitaActual": 0.71, "perCapitaExpected": 103.75 },
-      { "time": "Aug, 2011", "population": 83.25, "vehicles": 59.5, "traffic": 16.8, "perCapitaActual": 0.72, "perCapitaExpected": 104 },
-      { "time": "Sep, 2011", "population": 83.36, "vehicles": 60, "traffic": 16.5, "perCapitaActual": 0.72, "perCapitaExpected": 104.125 },
-      { "time": "Oct, 2011", "population": 83.56, "vehicles": 60.5, "traffic": 16.0, "perCapitaActual": 0.72, "perCapitaExpected": 104.375 },
-      { "time": "Nov, 2011", "population": 83.76, "vehicles": 61, "traffic": 15.8, "perCapitaActual": 0.73, "perCapitaExpected": 104.625 },
-      { "time": "Dec, 2011", "population": 83.96, "vehicles": 61.5, "traffic": 15.5, "perCapitaActual": 0.73, "perCapitaExpected": 104.875 },
-      { "time": "Jan, 2012", "population": 84.62, "vehicles": 62, "traffic": 16.0, "perCapitaActual": 0.74, "perCapitaExpected": 105 },
-      { "time": "Feb, 2012", "population": 84.26, "vehicles": 62.5, "traffic": 16.3, "perCapitaActual": 0.74, "perCapitaExpected": 105.25 },
-      { "time": "Mar, 2012", "population": 84.46, "vehicles": 63, "traffic": 16.5, "perCapitaActual": 0.75, "perCapitaExpected": 105.5 },
-      { "time": "Apr, 2012", "population": 84.66, "vehicles": 63.5, "traffic": 16.8, "perCapitaActual": 0.75, "perCapitaExpected": 105.75 },
-      { "time": "May, 2012", "population": 84.86, "vehicles": 64, "traffic": 17.0, "perCapitaActual": 0.75, "perCapitaExpected": 106 },
-      { "time": "Jun, 2012", "population": 85.06, "vehicles": 64.5, "traffic": 17.2, "perCapitaActual": 0.76, "perCapitaExpected": 106.25 },
-      { "time": "Jul, 2012", "population": 85.26, "vehicles": 65, "traffic": 17.5, "perCapitaActual": 0.76, "perCapitaExpected": 106.5 },
-      { "time": "Aug, 2012", "population": 85.46, "vehicles": 65.5, "traffic": 17.3, "perCapitaActual": 0.77, "perCapitaExpected": 106.75 },
-      { "time": "Sep, 2012", "population": 85.66, "vehicles": 66, "traffic": 17.0, "perCapitaActual": 0.77, "perCapitaExpected": 107 },
-      { "time": "Oct, 2012", "population": 85.86, "vehicles": 66.5, "traffic": 16.7, "perCapitaActual": 0.78, "perCapitaExpected": 107.25 },
-      { "time": "Nov, 2012", "population": 86.67, "vehicles": 67, "traffic": 16.5, "perCapitaActual": 0.78, "perCapitaExpected": 107.5 },
-      { "time": "Dec, 2012", "population": 86.26, "vehicles": 67.5, "traffic": 16.3, "perCapitaActual": 0.79, "perCapitaExpected": 107.75 },
-      { "time": "Jan, 2013", "population": 86.5, "vehicles": 68, "traffic": 16.0, "perCapitaActual": 0.79, "perCapitaExpected": 108.125 },
+    const data = [{ "time": "Jan, 2010", "population": 80, "vehicles": 50, "traffic": 15.0, "perCapitaActual": 0.63, "perCapitaExpected": 100 },
+  { "time": "Feb, 2010", "population": 80.15, "vehicles": 50.2, "traffic": 14.8, "perCapitaActual": 0.63, "perCapitaExpected": 100.125 },
+  { "time": "Mar, 2010", "population": 80.25, "vehicles": 50.5, "traffic": 15.2, "perCapitaActual": 0.63, "perCapitaExpected": 100.25 },
+  { "time": "Apr, 2010", "population": 80.35, "vehicles": 51, "traffic": 15.5, "perCapitaActual": 0.64, "perCapitaExpected": 100.375 },
+  { "time": "May, 2010", "population": 80.55, "vehicles": 51.5, "traffic": 16.0, "perCapitaActual": 0.64, "perCapitaExpected": 100.625 },
+  { "time": "Jun, 2010", "population": 80.75, "vehicles": 52, "traffic": 16.2, "perCapitaActual": 0.64, "perCapitaExpected": 100.875 },
+  { "time": "Jul, 2010", "population": 80.95, "vehicles": 52.5, "traffic": 17.0, "perCapitaActual": 0.65, "perCapitaExpected": 101.125 },
+  { "time": "Aug, 2010", "population": 81.15, "vehicles": 53, "traffic": 16.8, "perCapitaActual": 0.65, "perCapitaExpected": 101.375 },
+  { "time": "Sep, 2010", "population": 81.25, "vehicles": 53.5, "traffic": 16.5, "perCapitaActual": 0.66, "perCapitaExpected": 101.5 },
+  { "time": "Oct, 2010", "population": 81.45, "vehicles": 54, "traffic": 15.8, "perCapitaActual": 0.66, "perCapitaExpected": 101.75 },
+  { "time": "Nov, 2010", "population": 81.65, "vehicles": 54.5, "traffic": 15.6, "perCapitaActual": 0.67, "perCapitaExpected": 102 },
+  { "time": "Dec, 2010", "population": 81.85, "vehicles": 55, "traffic": 15.3, "perCapitaActual": 0.67, "perCapitaExpected": 102.25 },
+  { "time": "Jan, 2011", "population": 82.56, "vehicles": 56, "traffic": 15.5, "perCapitaActual": 0.68, "perCapitaExpected": 102.5 },
+  { "time": "Feb, 2011", "population": 82.15, "vehicles": 56.5, "traffic": 15.7, "perCapitaActual": 0.69, "perCapitaExpected": 102.625 },
+  { "time": "Mar, 2011", "population": 82.35, "vehicles": 57, "traffic": 16.0, "perCapitaActual": 0.69, "perCapitaExpected": 102.875 },
+  { "time": "Apr, 2011", "population": 82.45, "vehicles": 57.5, "traffic": 16.3, "perCapitaActual": 0.70, "perCapitaExpected": 103 },
+  { "time": "May, 2011", "population": 82.65, "vehicles": 58, "traffic": 16.5, "perCapitaActual": 0.70, "perCapitaExpected": 103.25 },
+  { "time": "Jun, 2011", "population": 82.85, "vehicles": 58.5, "traffic": 16.8, "perCapitaActual": 0.71, "perCapitaExpected": 103.5 },
+  { "time": "Jul, 2011", "population": 83.59, "vehicles": 59, "traffic": 17.0, "perCapitaActual": 0.71, "perCapitaExpected": 103.75 },
+  { "time": "Aug, 2011", "population": 83.25, "vehicles": 59.5, "traffic": 16.8, "perCapitaActual": 0.72, "perCapitaExpected": 104 },
+  { "time": "Sep, 2011", "population": 83.36, "vehicles": 60, "traffic": 16.5, "perCapitaActual": 0.72, "perCapitaExpected": 104.125 },
+  { "time": "Oct, 2011", "population": 83.56, "vehicles": 60.5, "traffic": 16.0, "perCapitaActual": 0.72, "perCapitaExpected": 104.375 },
+  { "time": "Nov, 2011", "population": 83.76, "vehicles": 61, "traffic": 15.8, "perCapitaActual": 0.73, "perCapitaExpected": 104.625 },
+  { "time": "Dec, 2011", "population": 83.96, "vehicles": 61.5, "traffic": 15.5, "perCapitaActual": 0.73, "perCapitaExpected": 104.875 },
+  { "time": "Jan, 2012", "population": 84.62, "vehicles": 62, "traffic": 16.0, "perCapitaActual": 0.74, "perCapitaExpected": 105 },
+  { "time": "Feb, 2012", "population": 84.26, "vehicles": 62.5, "traffic": 16.3, "perCapitaActual": 0.74, "perCapitaExpected": 105.25 },
+  { "time": "Mar, 2012", "population": 84.46, "vehicles": 63, "traffic": 16.5, "perCapitaActual": 0.75, "perCapitaExpected": 105.5 },
+  { "time": "Apr, 2012", "population": 84.66, "vehicles": 63.5, "traffic": 16.8, "perCapitaActual": 0.75, "perCapitaExpected": 105.75 },
+  { "time": "May, 2012", "population": 84.86, "vehicles": 64, "traffic": 17.0, "perCapitaActual": 0.75, "perCapitaExpected": 106 },
+  { "time": "Jun, 2012", "population": 85.06, "vehicles": 64.5, "traffic": 17.2, "perCapitaActual": 0.76, "perCapitaExpected": 106.25 },
+  { "time": "Jul, 2012", "population": 85.26, "vehicles": 65, "traffic": 17.5, "perCapitaActual": 0.76, "perCapitaExpected": 106.5 },
+  { "time": "Aug, 2012", "population": 85.46, "vehicles": 65.5, "traffic": 17.3, "perCapitaActual": 0.77, "perCapitaExpected": 106.75 },
+  { "time": "Sep, 2012", "population": 85.66, "vehicles": 66, "traffic": 17.0, "perCapitaActual": 0.77, "perCapitaExpected": 107 },
+  { "time": "Oct, 2012", "population": 85.86, "vehicles": 66.5, "traffic": 16.7, "perCapitaActual": 0.78, "perCapitaExpected": 107.25 },
+  { "time": "Nov, 2012", "population": 86.67, "vehicles": 67, "traffic": 16.5, "perCapitaActual": 0.78, "perCapitaExpected": 107.5 },
+  { "time": "Dec, 2012", "population": 86.26, "vehicles": 67.5, "traffic": 16.3, "perCapitaActual": 0.79, "perCapitaExpected": 107.75 },
+  { "time": "Jan, 2013", "population": 86.5, "vehicles": 68, "traffic": 16.0, "perCapitaActual": 0.79, "perCapitaExpected": 108.125 },
+  
     ];
 
     // Extract required data for graphs
