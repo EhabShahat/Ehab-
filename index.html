@@ -41,9 +41,9 @@
     /* Canvas Styling */
     canvas {
       display: block;
-      width: 100%; /* Ensure they take up the full width of their container */
-      height: 400px; /* Set a fixed height for the cards */
-      max-width: 1000px; /* Increase max-width for bigger cards */
+      width: 90%;
+      height: 400px; /* Set a fixed height for the canvas */
+      max-width: 800px;
       background: rgba(255, 255, 255, 0.05);  /* Darkened background for canvas */
       border-radius: 15px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* More prominent shadow for modern look */
@@ -52,23 +52,10 @@
       cursor: pointer; /* Make it clear it's clickable */
     }
 
-    /* Make the cards bigger on normal screens */
-    @media (min-width: 768px) {
-      canvas {
-        height: 500px; /* Increase height for larger cards on desktop */
-      }
-    }
-
-    /* Make the page responsive */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2.5rem;
-      }
-
-      canvas {
-        width: 100%; /* Full width on smaller screens */
-        height: auto; /* Allow height to adjust based on width */
-      }
+    /* Hover effect for canvas */
+    canvas:hover {
+      transform: scale(1.05);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4); /* More pronounced shadow on hover */
     }
 
     /* Styling for the graphs section */
@@ -80,6 +67,17 @@
       gap: 30px; /* Space between the charts */
       justify-content: center;
       align-items: center;
+    }
+
+    /* Make the page responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      canvas {
+        width: 100%; /* Full width on smaller screens */
+      }
     }
 
     /* Popup Modal Styling */
@@ -148,7 +146,7 @@
   <script>
     // Dataset
     const data = [
-     { "time": "Jan, 2010", "population": 80, "vehicles": 50, "traffic": 15.0, "perCapitaActual": 0.63, "perCapitaExpected": 100 },
+      { "time": "Jan, 2010", "population": 80, "vehicles": 50, "traffic": 15.0, "perCapitaActual": 0.63, "perCapitaExpected": 100 },
       { "time": "Feb, 2010", "population": 80.15, "vehicles": 50.2, "traffic": 14.8, "perCapitaActual": 0.63, "perCapitaExpected": 100.125 },
       { "time": "Mar, 2010", "population": 80.25, "vehicles": 50.5, "traffic": 15.2, "perCapitaActual": 0.63, "perCapitaExpected": 100.25 },
       { "time": "Apr, 2010", "population": 80.35, "vehicles": 51, "traffic": 15.5, "perCapitaActual": 0.64, "perCapitaExpected": 100.375 },
@@ -166,125 +164,180 @@
       { "time": "Apr, 2011", "population": 82.45, "vehicles": 57.5, "traffic": 16.3, "perCapitaActual": 0.70, "perCapitaExpected": 103 },
       { "time": "May, 2011", "population": 82.65, "vehicles": 58, "traffic": 16.5, "perCapitaActual": 0.70, "perCapitaExpected": 103.25 },
       { "time": "Jun, 2011", "population": 82.85, "vehicles": 58.5, "traffic": 16.8, "perCapitaActual": 0.71, "perCapitaExpected": 103.5 },
-      { "time": "Jul, 2011", "population": 83.05, "vehicles": 59, "traffic": 17.0, "perCapitaActual": 0.71, "perCapitaExpected": 103.75 },
-      { "time": "Aug, 2011", "population": 83.25, "vehicles": 59.5, "traffic": 17.2, "perCapitaActual": 0.72, "perCapitaExpected": 104 },
-      { "time": "Sep, 2011", "population": 83.45, "vehicles": 60, "traffic": 17.5, "perCapitaActual": 0.72, "perCapitaExpected": 104.25 },
-      { "time": "Oct, 2011", "population": 83.65, "vehicles": 60.5, "traffic": 17.8, "perCapitaActual": 0.73, "perCapitaExpected": 104.5 },
-      { "time": "Nov, 2011", "population": 83.85, "vehicles": 61, "traffic": 18.0, "perCapitaActual": 0.73, "perCapitaExpected": 104.75 },
-      { "time": "Dec, 2011", "population": 84.05, "vehicles": 61.5, "traffic": 18.2, "perCapitaActual": 0.74, "perCapitaExpected": 105 }
+      { "time": "Jul, 2011", "population": 83.59, "vehicles": 59, "traffic": 17.0, "perCapitaActual": 0.71, "perCapitaExpected": 103.75 },
+      { "time": "Aug, 2011", "population": 83.25, "vehicles": 59.5, "traffic": 16.8, "perCapitaActual": 0.72, "perCapitaExpected": 104 },
+      { "time": "Sep, 2011", "population": 83.36, "vehicles": 60, "traffic": 16.5, "perCapitaActual": 0.72, "perCapitaExpected": 104.125 },
+      { "time": "Oct, 2011", "population": 83.56, "vehicles": 60.5, "traffic": 16.0, "perCapitaActual": 0.72, "perCapitaExpected": 104.375 },
+      { "time": "Nov, 2011", "population": 83.76, "vehicles": 61, "traffic": 15.8, "perCapitaActual": 0.73, "perCapitaExpected": 104.625 },
+      { "time": "Dec, 2011", "population": 83.96, "vehicles": 61.5, "traffic": 15.5, "perCapitaActual": 0.73, "perCapitaExpected": 104.875 },
+      { "time": "Jan, 2012", "population": 84.62, "vehicles": 62, "traffic": 16.0, "perCapitaActual": 0.74, "perCapitaExpected": 105 },
+      { "time": "Feb, 2012", "population": 84.26, "vehicles": 62.5, "traffic": 16.3, "perCapitaActual": 0.74, "perCapitaExpected": 105.25 },
+      { "time": "Mar, 2012", "population": 84.46, "vehicles": 63, "traffic": 16.5, "perCapitaActual": 0.75, "perCapitaExpected": 105.5 },
+      { "time": "Apr, 2012", "population": 84.66, "vehicles": 63.5, "traffic": 16.8, "perCapitaActual": 0.75, "perCapitaExpected": 105.75 },
+      { "time": "May, 2012", "population": 84.86, "vehicles": 64, "traffic": 17.0, "perCapitaActual": 0.75, "perCapitaExpected": 106 },
+      { "time": "Jun, 2012", "population": 85.06, "vehicles": 64.5, "traffic": 17.2, "perCapitaActual": 0.76, "perCapitaExpected": 106.25 },
+      { "time": "Jul, 2012", "population": 85.26, "vehicles": 65, "traffic": 17.5, "perCapitaActual": 0.76, "perCapitaExpected": 106.5 },
+      { "time": "Aug, 2012", "population": 85.46, "vehicles": 65.5, "traffic": 17.3, "perCapitaActual": 0.77, "perCapitaExpected": 106.75 },
+      { "time": "Sep, 2012", "population": 85.66, "vehicles": 66, "traffic": 17.0, "perCapitaActual": 0.77, "perCapitaExpected": 107 },
+      { "time": "Oct, 2012", "population": 85.86, "vehicles": 66.5, "traffic": 16.7, "perCapitaActual": 0.78, "perCapitaExpected": 107.25 },
+      { "time": "Nov, 2012", "population": 86.67, "vehicles": 67, "traffic": 16.5, "perCapitaActual": 0.78, "perCapitaExpected": 107.5 },
+      { "time": "Dec, 2012", "population": 86.26, "vehicles": 67.5, "traffic": 16.3, "perCapitaActual": 0.79, "perCapitaExpected": 107.75 },    
     ];
 
     // Extract required data for graphs
-    const months = data.map(item => item.time);
-    const population = data.map(item => item.population);
-    const vehicles = data.map(item => item.vehicles);
-    const traffic = data.map(item => item.traffic);
-    const perCapitaActual = data.map(item => item.perCapitaActual);
-    const perCapitaExpected = data.map(item => item.perCapitaExpected);
+    const labels = data.map(row => row.time);
+    const population = data.map(row => row.population);
+    const vehicles = data.map(row => row.vehicles);
+    const traffic = data.map(row => row.traffic);
+    const perCapitaActual = data.map(row => row.perCapitaActual);
+    const perCapitaExpected = data.map(row => row.perCapitaExpected);
 
     // Graph 1: Population vs Vehicles
-    const ctx1 = document.getElementById("graph1").getContext("2d");
-    new Chart(ctx1, {
-      type: "line",
+    const chart1 = new Chart(document.getElementById('graph1'), {
+      type: 'line',
       data: {
-        labels: months,
+        labels,
         datasets: [
           {
-            label: "Population",
+            label: 'Population (millions)',
             data: population,
-            borderColor: "#00c6ff",
-            backgroundColor: "rgba(0, 198, 255, 0.2)",
-            fill: true
+            borderColor: '#00c6ff',
+            fill: false,
+            tension: 0.3
           },
           {
-            label: "Vehicles",
+            label: 'Vehicles (thousands)',
             data: vehicles,
-            borderColor: "#ff4d4d",
-            backgroundColor: "rgba(255, 77, 77, 0.2)",
-            fill: true
+            borderColor: '#4CAF50',
+            fill: false,
+            tension: 0.3
           }
         ]
       },
       options: {
         responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
+        plugins: { legend: { position: 'top' } },
+        scales: { 
+          x: { 
+            title: { display: true, text: 'Time' },
+            grid: { color: '#333' }
+          },
+          y: { 
+            title: { display: true, text: 'Values' },
+            grid: { color: '#333' },
+            ticks: { color: '#fff' }
           }
         }
       }
     });
 
-    // Graph 2: Traffic Over Time
-    const ctx2 = document.getElementById("graph2").getContext("2d");
-    new Chart(ctx2, {
-      type: "bar",
+    // Graph 2: Vehicles vs Traffic
+    const chart2 = new Chart(document.getElementById('graph2'), {
+      type: 'line',
       data: {
-        labels: months,
-        datasets: [{
-          label: "Traffic",
-          data: traffic,
-          backgroundColor: "#ff6347",
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-
-    // Graph 3: Per Capita (Actual vs Expected)
-    const ctx3 = document.getElementById("graph3").getContext("2d");
-    new Chart(ctx3, {
-      type: "line",
-      data: {
-        labels: months,
+        labels,
         datasets: [
           {
-            label: "Per Capita Actual",
-            data: perCapitaActual,
-            borderColor: "#32cd32",
-            backgroundColor: "rgba(50, 205, 50, 0.2)",
-            fill: true
+            label: 'Vehicles (thousands)',
+            data: vehicles,
+            borderColor: '#FF5733',
+            fill: false,
+            tension: 0.3
           },
           {
-            label: "Per Capita Expected",
-            data: perCapitaExpected,
-            borderColor: "#ff8c00",
-            backgroundColor: "rgba(255, 140, 0, 0.2)",
-            fill: true
+            label: 'Traffic (millions/day)',
+            data: traffic,
+            borderColor: '#800080',
+            fill: false,
+            tension: 0.3
           }
         ]
       },
       options: {
         responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
+        plugins: { legend: { position: 'top' } },
+        scales: { 
+          x: { 
+            title: { display: true, text: 'Time' },
+            grid: { color: '#333' }
+          },
+          y: { 
+            title: { display: true, text: 'Values' },
+            grid: { color: '#333' },
+            ticks: { color: '#fff' }
           }
         }
       }
     });
 
-    // Function to open the popup with the selected graph
-    function openPopup(graphId) {
-      const graphCanvas = document.getElementById(graphId);
-      const popupCanvas = document.getElementById('popupCanvas');
-      popupCanvas.width = graphCanvas.width;
-      popupCanvas.height = graphCanvas.height;
-      const ctxPopup = popupCanvas.getContext('2d');
-      ctxPopup.drawImage(graphCanvas, 0, 0);
+        // Graph 3: Per Capita (Actual vs Expected)
+    new Chart(document.getElementById('graph3'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Per Capita Actual',
+            data: perCapitaActual,
+            borderColor: '#FF6600',
+            fill: false,
+            tension: 0.3
+          },
+          {
+            label: 'Per Capita Expected',
+            data: perCapitaExpected,
+            borderColor: '#8B4513',
+            fill: false,
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'top' } },
+        scales: { 
+          x: { 
+            title: { display: true, text: 'Time' },
+            grid: { color: '#333' }
+          },
+          y: { 
+            title: { display: true, text: 'Values' },
+            grid: { color: '#333' },
+            ticks: { color: '#fff' }
+          }
+        }
+      }
+    });
 
-      document.getElementById("popup").classList.add("show");
+    // Popup functionality
+    function openPopup(canvasId) {
+      const canvas = document.getElementById(canvasId);
+      const popupCanvas = document.getElementById('popupCanvas');
+      const popup = document.getElementById('popup');
+      
+      // Copy the content of the clicked canvas to the popup canvas
+      const chart = Chart.instances.find(chart => chart.canvas.id === canvasId);
+      new Chart(popupCanvas, {
+        type: chart.config.type,
+        data: chart.config.data,
+        options: chart.config.options
+      });
+      
+      popup.classList.add('show');
     }
 
-    // Function to close the popup
     function closePopup() {
-      document.getElementById("popup").classList.remove("show");
+      const popup = document.getElementById('popup');
+      popup.classList.remove('show');
+      
+      // Clear the canvas in the popup to stop rendering
+      const popupCanvas = document.getElementById('popupCanvas');
+      popupCanvas.remove();
+      
+      // Re-create the canvas so the next time it is clicked it is initialized properly
+      const newPopupCanvas = document.createElement('canvas');
+      newPopupCanvas.id = 'popupCanvas';
+      document.getElementById('popup').appendChild(newPopupCanvas);
     }
   </script>
 </body>
