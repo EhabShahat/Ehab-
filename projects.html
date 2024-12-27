@@ -148,7 +148,6 @@
     .popup-close:hover {
       background-color: #ff3333;
     }
-   
   </style>
 </head>
 <body>
@@ -158,22 +157,22 @@
   <h3>Public Transport vs. Population Growth</h3>
   <div class="graph-container">
     <div class="canvas-wrapper">
-      <canvas id="graph1" onclick="openPopup('graph1')"></canvas>
+      <canvas id="graph1" role="img" aria-label="Population vs Vehicles" onclick="openPopup('graph1')"></canvas>
     </div>
     <h2>How do the number of public transport vehicles correlate with the traffic numbers?</h2>
     <h3>Public Transport vs. Traffic Numbers</h3>
     <div class="canvas-wrapper">
-      <canvas id="graph2" onclick="openPopup('graph2')"></canvas>
+      <canvas id="graph2" role="img" aria-label="Vehicles vs Traffic" onclick="openPopup('graph2')"></canvas>
     </div>
     <h2>Is the number of public transport vehicles sufficient, and what should the minimum requirement be?</h2>
-    <h3>Public Transport Vehicles per Capita</h3>
+    <h3>Public Transport Vehicles per Capita</h3>
     <div class="canvas-wrapper">
-      <canvas id="graph3" onclick="openPopup('graph3')"></canvas>
+      <canvas id="graph3" role="img" aria-label="Per Capita Actual vs Expected" onclick="openPopup('graph3')"></canvas>
     </div>
   </div>
-  <h4>the acual number of public transport vehicles is <span class="pre">0.8%</span> of the Supposedly minimum requirement </h4>
+  <h4>the actual number of public transport vehicles is <span class="pre">0.8%</span> of the supposedly minimum requirement </h4>
 
-  <div id="popup" class="popup">
+  <div id="popup" class="popup" role="dialog" aria-labelledby="popup-title" aria-modal="true">
     <button class="popup-close" onclick="closePopup()">X</button>
     <canvas id="popupCanvas"></canvas>
   </div>
@@ -181,7 +180,7 @@
   <script>
     // Dataset
     const data = [
-      { "time": "Jan, 2010", "population": 80, "vehicles": 50, "traffic": 15.0, "perCapitaActual": 0.63, "perCapitaExpected": 100 },
+      { "time": "Jan, 2010", "population": 80, "vehicles": 144, "traffic": 15.0, "perCapitaActual": 0.63, "perCapitaExpected": 100 },
       { "time": "Feb, 2010", "population": 80.15, "vehicles": 50.2, "traffic": 14.8, "perCapitaActual": 0.63, "perCapitaExpected": 100.125 },
       { "time": "Mar, 2010", "population": 80.25, "vehicles": 50.5, "traffic": 15.2, "perCapitaActual": 0.63, "perCapitaExpected": 100.25 },
       { "time": "Apr, 2010", "population": 80.35, "vehicles": 51, "traffic": 15.5, "perCapitaActual": 0.64, "perCapitaExpected": 100.375 },
@@ -371,122 +370,83 @@
     const perCapitaActual = data.map(row => row.perCapitaActual);
     const perCapitaExpected = data.map(row => row.perCapitaExpected);
 
-    // Graph 1: Population vs Vehicles
-    const chart1 = new Chart(document.getElementById('graph1'), {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [
-          {
-            label: 'Population (millions)',
-            data: population,
-            borderColor: '#00c6ff',
-            fill: false,
-            tension: 0.3
-          },
-          {
-            label: 'Vehicles (thousands)',
-            data: vehicles,
-            borderColor: '#4CAF50',
-            fill: false,
-            tension: 0.3
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { position: 'top' } },
-        scales: { 
-          x: { 
-            title: { display: true, text: 'Time' },
-            grid: { color: '#333' }
-          },
-          y: { 
-            title: { display: true, text: 'Values' },
-            grid: { color: '#333' },
-            ticks: { color: '#fff' }
+    // Initialize charts
+    function initChart(canvasId, labels, datasets) {
+      return new Chart(document.getElementById(canvasId), {
+        type: 'line',
+        data: {
+          labels,
+          datasets
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'top' } },
+          scales: { 
+            x: { 
+              title: { display: true, text: 'Time' },
+              grid: { color: '#333' }
+            },
+            y: { 
+              title: { display: true, text: 'Values' },
+              grid: { color: '#333' },
+              ticks: { color: '#fff' }
+            }
           }
         }
-      }
-    });
+      });
+    }
 
-    // Graph 2: Vehicles vs Traffic
-    const chart2 = new Chart(document.getElementById('graph2'), {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [
-          {
-            label: 'Vehicles (thousands)',
-            data: vehicles,
-            borderColor: '#00c6ff',
-            fill: false,
-            tension: 0.3
-          },
-          {
-            label: 'Traffic (millions/day)',
-            data: traffic,
-            borderColor: '#4CAF50',
-            fill: false,
-            tension: 0.3
-          }
-        ]
+    // Initialize all charts
+    initChart('graph1', labels, [
+      {
+        label: 'Population (millions)',
+        data: population,
+        borderColor: '#00c6ff',
+        fill: false,
+        tension: 0.3
       },
-      options: {
-        responsive: true,
-        plugins: { legend: { position: 'top' } },
-        scales: { 
-          x: { 
-            title: { display: true, text: 'Time' },
-            grid: { color: '#333' }
-          },
-          y: { 
-            title: { display: true, text: 'Values' },
-            grid: { color: '#333' },
-            ticks: { color: '#fff' }
-          }
-        }
+      {
+        label: 'Vehicles (thousands)',
+        data: vehicles,
+        borderColor: '#4CAF50',
+        fill: false,
+        tension: 0.3
       }
-    });
+    ]);
 
-        // Graph 3: Per Capita (Actual vs Expected)
-    new Chart(document.getElementById('graph3'), {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [
-          {
-            label: 'Per Capita Actual',
-            data: perCapitaActual,
-            borderColor: '#00c6ff',
-            fill: false,
-            tension: 0.3
-          },
-          {
-            label: 'Per Capita Expected',
-            data: perCapitaExpected,
-            borderColor: '#4CAF50',
-            fill: false,
-            tension: 0.3
-          }
-        ]
+    initChart('graph2', labels, [
+      {
+        label: 'Vehicles (thousands)',
+        data: vehicles,
+        borderColor: '#00c6ff',
+        fill: false,
+        tension: 0.3
       },
-      options: {
-        responsive: true,
-        plugins: { legend: { position: 'top' } },
-        scales: { 
-          x: { 
-            title: { display: true, text: 'Time' },
-            grid: { color: '#333' }
-          },
-          y: { 
-            title: { display: true, text: 'Values' },
-            grid: { color: '#333' },
-            ticks: { color: '#fff' }
-          }
-        }
+      {
+        label: 'Traffic (millions/day)',
+        data: traffic,
+        borderColor: '#4CAF50',
+        fill: false,
+        tension: 0.3
       }
-    });
+    ]);
+
+    initChart('graph3', labels, [
+      {
+        label: 'Per Capita Actual',
+        data: perCapitaActual,
+        borderColor: '#00c6ff',
+        fill: false,
+        tension: 0.3
+      },
+      {
+        label: 'Per Capita Expected',
+        data: perCapitaExpected,
+        borderColor: '#4CAF50',
+        fill: false,
+        tension: 0.3
+      }
+    ]);
 
     // Popup functionality
     function openPopup(canvasId) {
