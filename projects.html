@@ -22,33 +22,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px;
+      text-align: center;
+      padding: 40px;
       transition: background-color 0.3s ease; /* Smooth transition on background change */
-    }
-
-    /* Navigation Bar */
-    nav {
-      width: 100%;
-      max-width: 1300px;
-      padding: 15px 30px;
-      background: #121721;
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-
-    nav a {
-      color: #00c6ff;
-      margin: 0 20px;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #4CAF50;
     }
 
     /* Main Header Styling */
@@ -60,52 +36,36 @@
       margin-bottom: 20px;
       text-transform: uppercase;
     }
-
     h2 {
       font-size: 1.5rem;
-      font-weight: 400;
+      font-weight: 300;
       letter-spacing: 1.5px;
-      color: #F0F6FC; /* Bright color for header */
-      margin-bottom: 15px;
-      text-transform: none;
+      color: #F0F6FC; /* Bright color for sub-header */
+      margin-bottom: 20px;
+      text-transform: lowercase;
     }
-
+    
     h3 {
-      font-size: 1.2rem;
-      font-weight: 500;
-      letter-spacing: 1px;
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: .8px;
       color: #fff; /* Bright color for header */
       text-transform: uppercase;
+      margin-top: 10px;
     }
-
+    
     h4 {
-      font-size: 1.1rem;
-      font-weight: 300;
+      font-size: 1rem;
+      font-weight: 200;
       letter-spacing: 1px;
-      color: #F0F6FC; /* Bright color for header */
+      color: #F0F6FC; /* Bright color for footer */
       margin-top: 20px;
-      text-transform: none;
+      text-transform: lowercase;
     }
-
     span.pre {
       font-size: 1.5rem;
-      font-weight: 500;
+      font-weight: 300;
       color: #FF5733;
-    }
-
-    /* Graph Container */
-    .graph-container {
-      width: 100%;
-      max-width: 1300px;
-      display: flex;
-      flex-direction: column; /* Stack charts vertically */
-      gap: 30px; /* Space between the charts */
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      background: #121721;
-      border-radius: 10px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
 
     /* Canvas Styling */
@@ -113,10 +73,10 @@
       display: block;
       width: 90%;
       height: 400px; /* Set a fixed height for the canvas */
-      max-width: 800px;
-      background: rgba(21, 26, 35, 0.8);  /* Darkened background for canvas */
+      max-width: 900px;
+      background: RGBA(21, 26, 35, 0.7);  /* Darkened background for canvas */
       border-radius: 15px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* More prominent shadow for modern look */
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* More prominent shadow for modern look */
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       margin-bottom: 30px; /* Space between canvas elements */
       cursor: pointer; /* Make it clear it's clickable */
@@ -124,8 +84,38 @@
 
     /* Hover effect for canvas */
     canvas:hover {
-      transform: scale(1.03);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* More pronounced shadow on hover */
+      transform: scale(1.05);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4); /* More pronounced shadow on hover */
+    }
+
+    /* Styling for the graphs section */
+    .graph-container {
+      width: 100%;
+      max-width: 1300px;
+      display: flex;
+      flex-direction: column; /* Stack charts vertically */
+      gap: 40px; /* Space between the charts */
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Make the page responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      canvas {
+        width: 100%; /* Full width on smaller screens */
+      }
+
+      .graph-container {
+        gap: 20px; /* Adjust gap for smaller screens */
+      }
+
+      h2 {
+        font-size: 1.25rem;
+      }
     }
 
     /* Popup Modal Styling */
@@ -140,26 +130,12 @@
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      padding: 30px;
-    }
-
-    .popup-content {
-      width: 90%;
-      max-width: 1100px;
-      background: #121721;
-      border-radius: 10px;
-      padding: 30px;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
     }
 
     .popup canvas {
-      width: 100%;
-      height: 60vh; /* Set height to 60% of viewport height */
-      background: rgba(21, 26, 35, 0.8); /* Darkened background for canvas */
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 15px;
     }
 
     .popup.show {
@@ -173,9 +149,9 @@
       background: #ff4d4d;
       color: #fff;
       border: none;
-      padding: 10px 15px;
-      font-size: 18px;
-      border-radius: 5px;
+      padding: 12px 16px;
+      font-size: 20px;
+      border-radius: 50%;
       cursor: pointer;
       transition: background-color 0.3s;
     }
@@ -183,39 +159,34 @@
     .popup-close:hover {
       background-color: #ff3333;
     }
+
   </style>
 </head>
 <body>
   
-  <nav>
-    <a href="#graph1">Population vs Vehicles</a>
-    <a href="#graph2">Vehicles vs Traffic</a>
-    <a href="#graph3">Per Capita (Actual vs Expected)</a>
-  </nav>
-
   <h1>NEGY Transport Visualization</h1>
   <h2>Does the growth in public transport vehicles keep pace with population growth?</h2>
   <h3>Public Transport vs. Population Growth</h3>
-  <div class="graph-container" id="graph1">
-    <canvas id="graph1Canvas" onclick="openPopup('graph1Canvas')"></canvas>
+  <div class="graph-container">
+    <div class="canvas-wrapper">
+      <canvas id="graph1" onclick="openPopup('graph1')"></canvas>
+    </div>
+    <h2>How do the number of public transport vehicles correlate with the traffic numbers?</h2>
+    <h3>Public Transport vs. Traffic Numbers</h3>
+    <div class="canvas-wrapper">
+      <canvas id="graph2" onclick="openPopup('graph2')"></canvas>
+    </div>
+    <h2>Is the number of public transport vehicles sufficient, and what should the minimum requirement be?</h2>
+    <h3>Public Transport Vehicles per Capita</h3>
+    <div class="canvas-wrapper">
+      <canvas id="graph3" onclick="openPopup('graph3')"></canvas>
+    </div>
   </div>
-  <h2>How do the number of public transport vehicles correlate with the traffic numbers?</h2>
-  <h3>Public Transport vs. Traffic Numbers</h3>
-  <div class="graph-container" id="graph2">
-    <canvas id="graph2Canvas" onclick="openPopup('graph2Canvas')"></canvas>
-  </div>
-  <h2>Is the number of public transport vehicles sufficient, and what should the minimum requirement be?</h2>
-  <h3>Public Transport Vehicles per Capita</h3>
-  <div class="graph-container" id="graph3">
-    <canvas id="graph3Canvas" onclick="openPopup('graph3Canvas')"></canvas>
-  </div>
-  <h4>The actual number of public transport vehicles is <span class="pre">0.8%</span> of the supposedly minimum requirement.</h4>
+  <h4>The actual number of public transport vehicles is <span class="pre">0.8%</span> of the supposed minimum requirement.</h4>
 
   <div id="popup" class="popup">
-    <div class="popup-content">
-      <button class="popup-close" onclick="closePopup()">X</button>
-      <canvas id="popupCanvas"></canvas>
-    </div>
+    <button class="popup-close" onclick="closePopup()">X</button>
+    <canvas id="popupCanvas"></canvas>
   </div>
 
   <script>
@@ -412,7 +383,7 @@
     const perCapitaExpected = data.map(row => row.perCapitaExpected);
 
     // Graph 1: Population vs Vehicles
-    new Chart(document.getElementById('graph1Canvas'), {
+    const chart1 = new Chart(document.getElementById('graph1'), {
       type: 'line',
       data: {
         labels,
@@ -438,12 +409,11 @@
         plugins: { legend: { position: 'top' } },
         scales: { 
           x: { 
-            title: { display: true, text: 'Time', color: '#fff' },
-            grid: { color: '#333' },
-            ticks: { color: '#fff' }
+            title: { display: true, text: 'Time' },
+            grid: { color: '#333' }
           },
           y: { 
-            title: { display: true, text: 'Values', color: '#fff' },
+            title: { display: true, text: 'Values' },
             grid: { color: '#333' },
             ticks: { color: '#fff' }
           }
@@ -452,7 +422,7 @@
     });
 
     // Graph 2: Vehicles vs Traffic
-    new Chart(document.getElementById('graph2Canvas'), {
+    const chart2 = new Chart(document.getElementById('graph2'), {
       type: 'line',
       data: {
         labels,
@@ -478,12 +448,11 @@
         plugins: { legend: { position: 'top' } },
         scales: { 
           x: { 
-            title: { display: true, text: 'Time', color: '#fff' },
-            grid: { color: '#333' },
-            ticks: { color: '#fff' }
+            title: { display: true, text: 'Time' },
+            grid: { color: '#333' }
           },
           y: { 
-            title: { display: true, text: 'Values', color: '#fff' },
+            title: { display: true, text: 'Values' },
             grid: { color: '#333' },
             ticks: { color: '#fff' }
           }
@@ -492,7 +461,7 @@
     });
 
     // Graph 3: Per Capita (Actual vs Expected)
-    new Chart(document.getElementById('graph3Canvas'), {
+    new Chart(document.getElementById('graph3'), {
       type: 'line',
       data: {
         labels,
@@ -518,12 +487,11 @@
         plugins: { legend: { position: 'top' } },
         scales: { 
           x: { 
-            title: { display: true, text: 'Time', color: '#fff' },
-            grid: { color: '#333' },
-            ticks: { color: '#fff' }
+            title: { display: true, text: 'Time' },
+            grid: { color: '#333' }
           },
           y: { 
-            title: { display: true, text: 'Values', color: '#fff' },
+            title: { display: true, text: 'Values' },
             grid: { color: '#333' },
             ticks: { color: '#fff' }
           }
@@ -559,7 +527,7 @@
       // Re-create the canvas so the next time it is clicked it is initialized properly
       const newPopupCanvas = document.createElement('canvas');
       newPopupCanvas.id = 'popupCanvas';
-      document.getElementById('popup').querySelector('.popup-content').appendChild(newPopupCanvas);
+      document.getElementById('popup').appendChild(newPopupCanvas);
     }
   </script>
 </body>
