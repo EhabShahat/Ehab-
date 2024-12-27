@@ -3,152 +3,460 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ehab Shahat Resume</title>
+    <title>Ehabs resume</title>
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: #e0e0e0;
-            line-height: 1.6;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background-color: #010104;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: auto;
         }
-        .container {
-            max-width: 800px;
+
+        .background-section {
+            position: relative;
+            background: url('https://ehabshahat.github.io/Portfolio/Epic.jpg') no-repeat center center;
+            background-size: contain;
+            width: auto;
+            max-width: auto;
+            padding: 50px;
+            border-radius: 20px;
+            height: auto;
+            max-height: 70%;
             margin: 20px auto;
-            background: #1e1e1e;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 60% 30%;
+            align-items: center;
+            max-width: 1200px;
             padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            border-radius: 8px;
+            gap: 10%;
+            position: relative;
         }
-        h1, h2, h3 {
-            color: #bb86fc;
+        .containera {
+            display: grid;
+            grid-template-columns: 60% 30%;
+            align-items: center;
+            max-width: 1200px;
+            padding: 20px;
+            gap: 10%;
+            position: relative;
         }
+
+        .new-section {
+            background-color: #1a1a1a;
+            padding: 50px;
+            margin: 20px auto;
+            max-width: 1200px;
+            width: 80%;
+            border-radius: 20px;
+            color: #fff;
+            margin-top: 40px; /* Ensure it is spaced from the top section */
+        }
+
+        .text-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main-text {
+            text-align: left;
+        }
+
+        .main-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+        }
+
+        .main-text p {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        .down-arrow {
+            margin-top: 30px;
+            margin-left: 25%;
+            font-size: 2.5rem;
+            text-align: left;
+            color: #3a86ff;
+            cursor: pointer;
+        }
+
+        .bn60 {
+            color: #2579FF;
+            font-size: 1.0em;
+            font-weight: 900;
+            position: relative;
+            outline: none;
+            border-radius: 70px;
+            border: .2px solid #2579FF;
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            height: 30px;
+            width: 40px;
+            text-align: center;
+            text-decoration: none;
+            margin-left: 4%;
+        }
+
+        .secondary-column {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
         .section {
-            margin-bottom: 20px;
+            border-top: 1px solid #444;
+            padding-top: 20px;
         }
+
         .section h2 {
-            border-bottom: 2px solid #bb86fc;
-            padding-bottom: 5px;
+            font-size: 1.5rem;
             margin-bottom: 10px;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
+        .section h4 {
+            font-size: .8rem;
+            margin-bottom: 5px;
         }
-        ul li {
-            margin-bottom: 10px;
+        
+
+        .section p {
+            font-size: 1rem;
+            color: #aaa;
         }
-        a {
-            color: #03dac6;
+
+        .section a {
+            font-size: 1rem;
+            color: #3a86ff;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+         .section img {
+            width: 100%;
+            height: auto;
+        }
+        .bn61 {
+            color: #2579FF;
+            font-size: 1.0em;
+            font-weight: 900;
+            position: relative;
+            outline: none;
+            border-radius: 70px;
+            border: .2px solid #2579FF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            height: 40px;
+            width: 90%;
+            text-align: center;
+            text-decoration: none;
+            margin-left: 4%;
+            padding-top: 10px;
+        }
+      
+          
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
+            color: #aaa;
             text-decoration: none;
         }
-        a:hover {
-            text-decoration: underline;
+
+        .social-icons a:hover {
+            color: #3a86ff;
         }
-        p, ul li {
-            color: #e0e0e0;
+      
+      
+         .bn39 {
+            background-image: linear-gradient(135deg, #008aff, #86d472);
+            border-radius: 6px;
+            box-sizing: border-box;
+            color: #ffffff;
+            display: block;
+            height: 120px;
+            font-size: 2rem;
+            font-weight: 1200;
+            padding: 6px;
+            position: relative;
+            text-decoration: none;
+            width: 100%;
+            
+            z-index: 2;
+            margin-top: 20px;
+          }
+
+          .bn39:hover {
+            color: #fff;
+          }
+
+          .bn39 .bn39span {
+            align-items: center;
+            background: #0e0e10;
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            transition: background 0.5s ease;
+            width: 100%;
+          }
+
+          .bn39:hover .bn39span {
+            background: transparent;
+          }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .main-text {
+                text-align: center;
+            }
+
+            .down-arrow {
+                margin-top: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Ehab Shahat</h1>
-        <p><strong>Mobile:</strong> <a href="tel:+201210972719">+201210972719</a></p>
-        <p><strong>Date of Birth:</strong> 12 September 2000</p>
-        <p><strong>Address:</strong> 10th of Ramadan City, Esh Sharkia, Egypt</p>
-        <p><strong>Email:</strong> <a href="mailto:EhabAShahat@gmail.com">EhabAShahat@gmail.com</a></p>
-        <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/EhabAShahat">linkedin.com/in/EhabAShahat</a></p>
+    <div class="background-section">
+        <div class="container">
+            <!-- Left Column -->
+            <div class="text-column">
+                <div class="main-text">
+                    <h1>I'm Ehab, a <br> Data Analysis</h1>
+                    <p></br> Address: 10th of Ramadan City, Esh Sharkia. </p>
+                    <p>LinkedIn: EhabAShahat <a class="bn60" href="linkedin.com/in/EhabAShahat">➜</a></p>
+                    <p>Email: EhabAShahat@gmail.com <a class="bn60" href="mailto:EhabAShahat@gmail.com">➜</a></p>
+                    <p> Mobile: +2012 10972719<a class="bn60" href="tel:+201210972719">➜</a></p>
+                </div>
+                <div class="down-arrow">&#8595;</div>
+            </div>
 
-        <div class="section">
-            <h2>Education</h2>
-            <p><strong>2019 - 2023:</strong> Bachelor's degree, Social Work, Helwan University Cairo</p>
+            <!-- Right Column -->
+            <div class="secondary-column">
+                <div class="section">
+                    <h2>About Me</h2>
+                    <p>a motivated individual passionate about data analytics, eager to apply my skills to make a meaningful impact. With a proven track record of collaboration and strong analytical abilities, I thrive in solving complex problems. I am committed to continuous learning and excited to develop my skills in a dynamic work environment.</p>
+                    <a href="#">Learn More &rarr;</a>
+                </div>
+
+                <div class="section">
+                    <h2>My Work Experience</h2>
+                    <p>• Flow Admin at Amazon,</br>•  TOM Specialist at Amazon,</br>•  Studio Helper at Amazon. </p>
+                    <a href="#new-section">See More &rarr;</a>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="section">
-            <h2>Skills</h2>
-            <h3>Technical Skills</h3>
-            <ul>
-                <li>Python</li>
-                <li>SQL</li>
-                <li>Tableau</li>
-                <li>Data Visualization</li>
-                <li>Data Cleaning</li>
-                <li>Microsoft Excel</li>
-                <li>Spreadsheet</li>
-            </ul>
-            <h3>Soft Skills</h3>
-            <ul>
-                <li>Critical Thinking</li>
-                <li>Communication</li>
-                <li>Problem Solving</li>
-                <li>Project Management</li>
-                <li>Creativity</li>
-                <li>Curiosity</li>
-                <li>Time Management</li>
-            </ul>
+    <!-- New Section below the current section -->
+    <div class="new-section">
+        <div class="containera">
+            
+            <div class="secondary-column">
+              <h1>Work Experience</h1>
+                <div class="section">
+                    <h2>Studio Helper</h2>
+                    <h3>Amazon</h3>
+                    <h4>Jan 2022 –  Jun 2022</h4>
+                    <p>Managed a team of 5, increasing team productivity by 20% through effective
+coaching and performance management and oversaw all activities within the
+team. Worked with multiple systems and various workgroups to gather
+necessary information and make informed decisions that created the most
+value for the company. Created and managed shift schedules, resulting in a
+85% shift coverage rate and ensuring seamless studio operations, prepared
+daily/weekly reports on team performance and email communication, providing
+key insights to senior management and driving process improvements,
+Developed and implemented new reporting processes that improved data
+accuracy and reduced reporting time by 50%, and tracked and structured
+various tasks, employees, and documents using Amazon Chime, Google
+sheets and dashboards, ensuring all team members were aligned and on track
+to meet project deadlines. Developed and implemented new document
+management processes that reduced document retrieval time by 30%.</p>
+                </div>
+
+                <div class="section">
+                    <h2>TOM Specialist</h2>
+                    <h3>Amazon</h3>
+                    <h4>Oct 2020 -  Apr 2021</h4>
+                    <p>I worked collaboratively with various teams and systems to gather information
+and make informed decisions that created value for the company. I ensured
+compliance with safety and environmental regulations and developed new
+transportation processes that reduced costs by 15% and improved delivery
+times by 10%. I tracked and analyzed performance metrics, developed data
+reporting and tracking tools, and prepared monthly reports to communicate
+progress to senior management. Additionally, I tracked and followed up on
+supplier responsible costs and provided support to the TOM team as assigned.</p>
+                </div>
+              
+              <div class="section">
+                    <h2>Flow Admin</h2>
+                    <h3>Amazon</h3>
+                    <h4>Sep 2018 -  Oct 2019</h4>
+                    <p>I played a critical role in overseeing operations and ensuring seamless workflow. I
+was responsible for creating and implementing shift plans, maintaining reports and
+emails, distributing information to shift members and stakeholders, and organizing
+tasks and documents. By managing multiple priorities and deadlines, I was able to
+improve productivity and efficiency. Overall, my contributions helped to streamline
+workflows and improve collaboration across teams.</p>
+                </div>
+              
+              
+              
+            </div>
+            <div class="secondary-column">
+              <h1>Competitions & Skills</h1>
+              <div class="section">
+                    <h2>Cubiscan Hero</h2>
+                    <h3>Amazon</h3>
+                    <h4>Oct 2018 – Apr 2019</h4>
+                  <p>Led a team to perform Cubiscan for over 500,000 items, achieving the highest
+number in the Middle East as part of a company-wide initiative to improve
+inventory accuracy and efficiency</p>
+                </div>
+                <div class="section">
+                    <h2>Technical Skills</h2>
+                    
+                  <p>• Python </br>
+                  • SQL </br>
+                  • Tableau </br>
+                  • Data Visualization </br>
+                  • Data Cleaning </br>
+                  • Microsoft Excel </br>
+                  • Spreadsheet 
+                  </p>
+                </div>
+
+                <div class="section">
+                    <h2>Soft skills</h2>
+                    
+                  <p>• Critical Thinking </br>
+                  • Communication </br>
+                  • Problem solving </br>
+                  • Project management </br>
+                  • Creativity </br>
+                  • Curiosity </br>
+                  • Time management 
+                  </p>
+                </div>
+                
+            </div>
         </div>
+    </div>
+    <!-- New Section below the current section -->
+    <div class="new-section">
+        <div class="containera">
+            
+            <div class="secondary-column">
+              <h1>Courses and Certifications</h1>
+                <div class="section">
+                    <h2>Google Data Analytics Professional</h2>
+                    <h3>Google</h3>
+                    <h4>GFK24A4J37DJ</h4>
+                    <img src="https://ehabshahat.github.io/Portfolio/Google.jpg"  >
+                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/GFK24A4J37DJ">Check it out at coursera.org</a>
+                </div>
+                <div class="section">
+                    <h2>IBM Data Analyst Specialization</h2>
+                    <h3>IBM</h3>
+                    <h4>DL6BK5ESBLFK</h4>
+                    <img src="https://ehabshahat.github.io/Portfolio/IBM.jpg"  >
+                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/DL6BK5ESBLFK">Check it out at coursera.org</a>
+                </div>
+              
+                <div class="section">
+                    <h2>Excel Skills for Business Specialization</h2>
+                    <h3>Macquarie University</h3>
+                    <h4>4QN4EJBSA888</h4>
+                    <img src="https://ehabshahat.github.io/Portfolio/Macquarie.jpg"  >
+                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/4QN4EJBSA888">Check it out at coursera.org</a>
+                </div>
+                <div class="section">
+                    <h2>Python for Everybody Specialization (Uncompleted) </h2>
+                    <h3>University of Michigan</h3>
+                    <h4>VURK38ZK9AY3</h4>
+                    <img src="https://ehabshahat.github.io/Portfolio/Michigan.jpg"  >
+                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/certificate/VURK38ZK9AY3">Check it out at coursera.org</a>
+                </div>
 
-        <div class="section">
-            <h2>Courses and Certifications</h2>
-            <ul>
-                <li>Google Data Analytics Professional (Google, <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/GFK24A4J37DJ">Certificate</a>)</li>
-                <li>IBM Data Analyst Specialization (IBM, <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/DL6BK5ESBLFK">Certificate</a>)</li>
-                <li>Excel Skills for Business Specialization (Macquarie University, <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/4QN4EJBSA888">Certificate</a>)</li>
-                <li>Python for Everybody Specialization (Uncompleted, University of Michigan, <a href="https://www.coursera.org/account/accomplishments/certificate/VURK38ZK9AY3">Certificate</a>)</li>
-            </ul>
-        </div>
+            </div>
+            <div class="secondary-column">
+              <h1>Education & Internships</h1>
+              <div class="section">
+                    <h2>Bachelor's degree, Social Work</h2>
+                    <h3>Helwan University Cairo</h3>
+                    <h4>2019 - 2023</h4>
+                  
+                </div>
+                <div class="section">
+                    <h2>Human Resources Intern</h2>
+                     <h3>NewLife HR</h3>
+                    <h4>May 2020 - Sep 2020</h4>
+                  <p>I demonstrated my ability to address employment relations issues effectively,
+ensuring a positive employee experience. I actively communicated with job
+applicants, informing them of their job duties, responsibilities, benefits, schedules,
+and promotion opportunities. I streamlined the onboarding process by ensuring
+that new hire paperwork was completed and processed on time, and I took
+attendance to ensure accurate record-keeping. I also worked on various HRrelated tasks such as preparing employment records for hiring, transferring,
+promoting, and terminating, and created and maintained reports and email
+communication to facilitate efficient and effective communication within the
+organization. My contributions as an HR Intern helped to enhance the overall
+effectiveness of the HR department and positively impacted the company culture. </p>
+                </div>
+              
+              
+              <div class="section">
+                    <h2>Projects</h2>
+                    <h3>• Google Data Analytics Capstone.</h3>
+                    <h4>November, 2022</h4>
+                </br>
+                </br>
+                    <h3>• IBM Data Analyst Capstone Project.</h3>
+                    <h4>March, 2023</h4>
+                  
+                </div>
+                
+                    <a class="bn39" href="https://ehabshahat.github.io/Portfolio/projects.html" ><span class="bn39span">NEGY Transport.</span></a>
+              <div class="section">
+                    <h2>Extracurricular</h2>
+                     <h3>• Ant a2w mn elmokhadarat</h3>
+                    <h4>At Helwan University</h4>
+                  <p>Volunteer, January 2022 – April 2022</p>
+                </br>
+                </br>  
+                    
+                     <h3>• University Housing Unit</h3>
+                    <h4>At Helwan University</h4>
+                  <p>Volunteer, January 2021 – April 2021</p>
+                </div>
 
-        <div class="section">
-            <h2>Work Experience</h2>
-            <h3>Studio Helper, Amazon (Jan 2022 – Jun 2022)</h3>
-            <ul>
-                <li>Managed a team of 5, increasing team productivity by 20% through effective coaching and performance management.</li>
-                <li>Oversaw team activities and implemented new reporting processes that improved data accuracy and reduced reporting time by 50%.</li>
-                <li>Developed and implemented document management processes, reducing retrieval time by 30%.</li>
-            </ul>
-
-            <h3>TOM Specialist, Amazon (Oct 2020 - Apr 2021)</h3>
-            <ul>
-                <li>Developed transportation processes that reduced costs by 15% and improved delivery times by 10%.</li>
-                <li>Tracked performance metrics and prepared monthly reports for senior management.</li>
-            </ul>
-
-            <h3>Flow Admin, Amazon (Sep 2018 - Oct 2019)</h3>
-            <ul>
-                <li>Created and implemented shift plans, maintained reports, and distributed information to stakeholders.</li>
-                <li>Streamlined workflows and improved collaboration across teams.</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Competitions</h2>
-            <p><strong>Cubiscan Hero, Amazon (Oct 2018 – Apr 2019):</strong> Led a team to perform Cubiscan for over 500,000 items, achieving the highest number in the Middle East.</p>
-        </div>
-
-        <div class="section">
-            <h2>Summer Training & Internships</h2>
-            <h3>Human Resources Intern, NewLife HR (May 2020 - Sep 2020)</h3>
-            <ul>
-                <li>Streamlined the onboarding process and ensured accurate record-keeping.</li>
-                <li>Created employment records and maintained efficient communication within the organization.</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Projects</h2>
-            <ul>
-                <li>Google Data Analytics Capstone (Nov 18, 2022)</li>
-                <li>IBM Data Analyst Capstone Project (Mar 28, 2023)</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Extracurricular</h2>
-            <ul>
-                <li>Volunteer, Ant a2w mn elmokhadarat, Helwan University (Jan 2022 – Apr 2022)</li>
-                <li>Volunteer, University Housing Unit, Helwan University (Jan 2022 – Apr 2022)</li>
-            </ul>
+                
+                    
+                
+                
+                
+            </div>
         </div>
     </div>
 </body>
