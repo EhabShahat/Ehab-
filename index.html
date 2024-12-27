@@ -43,7 +43,6 @@
         .containera {
             display: grid;
             grid-template-columns: 60% 30%;
-            align-items: center;
             max-width: 1200px;
             padding: 20px;
             gap: 10%;
@@ -89,7 +88,33 @@
             color: #3a86ff;
             cursor: pointer;
         }
+                
+      
+      
+      .arrow {
+          top: 50%;
+          
+          transform: translate(-50%, );
+      }
 
+      .arrow span {
+          display: block;
+          width: 1.5vw;
+          height: 1.5vw;
+          border-bottom: 5px solid white;
+          border-right: 5px solid white;
+          transform: rotate(45deg);
+          margin: -10px;
+          animation: animate 2s infinite;
+      }
+
+      .arrow span:nth-child(2) {
+          animation-delay: -0.2s;
+      }
+
+      .arrow span:nth-child(3) {
+          animation-delay: -0.4s;
+      }
         .bn60 {
             color: #2579FF;
             font-size: 1.0em;
@@ -236,6 +261,20 @@
                 margin-top: 20px;
             }
         }
+      
+      @keyframes animate {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-20px, -20px);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(20px, 20px);
+    }
+}
     </style>
 </head>
 <body>
@@ -246,11 +285,16 @@
                 <div class="main-text">
                     <h1>I'm Ehab, a <br> Data Analysis</h1>
                     <p></br> Address: 10th of Ramadan City, Esh Sharkia. </p>
-                    <p>LinkedIn: EhabAShahat <a class="bn60" href="linkedin.com/in/EhabAShahat">➜</a></p>
+                    <p>LinkedIn: EhabAShahat <a class="bn60" href="https://www.linkedin.com/in/ehabashahat/">➜</a></p>
                     <p>Email: EhabAShahat@gmail.com <a class="bn60" href="mailto:EhabAShahat@gmail.com">➜</a></p>
                     <p> Mobile: +2012 10972719<a class="bn60" href="tel:+201210972719">➜</a></p>
                 </div>
-                <div class="down-arrow">&#8595;</div>
+                <div class="down-arrow">    <div class="arrow">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
             </div>
 
             <!-- Right Column -->
@@ -258,13 +302,13 @@
                 <div class="section">
                     <h2>About Me</h2>
                     <p>a motivated individual passionate about data analytics, eager to apply my skills to make a meaningful impact. With a proven track record of collaboration and strong analytical abilities, I thrive in solving complex problems. I am committed to continuous learning and excited to develop my skills in a dynamic work environment.</p>
-                    <a href="#">Learn More &rarr;</a>
+                    
                 </div>
 
                 <div class="section">
                     <h2>My Work Experience</h2>
                     <p>• Flow Admin at Amazon,</br>•  TOM Specialist at Amazon,</br>•  Studio Helper at Amazon. </p>
-                    <a href="#new-section">See More &rarr;</a>
+                    <a href="#WorkExperience">See More &rarr;</a>
                 </div>
             </div>
         </div>
@@ -275,7 +319,7 @@
         <div class="containera">
             
             <div class="secondary-column">
-              <h1>Work Experience</h1>
+              <h1 id="WorkExperience">Work Experience</h1>
                 <div class="section">
                     <h2>Studio Helper</h2>
                     <h3>Amazon</h3>
