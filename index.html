@@ -71,8 +71,12 @@
         }
 
         .main-text h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             line-height: 1.2;
+            font-weight: 900;
+            background: linear-gradient(45deg, #3a86ff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .main-text p {
@@ -106,10 +110,12 @@
           transform: rotate(45deg);
           margin: -10px;
           animation: animate 2s infinite;
+        
       }
 
       .arrow span:nth-child(2) {
           animation-delay: -0.2s;
+        
       }
 
       .arrow span:nth-child(3) {
@@ -122,7 +128,6 @@
             position: relative;
             outline: none;
             border-radius: 70px;
-            border: .2px solid #2579FF;
             display: inline-block;
             justify-content: center;
             align-items: center;
@@ -132,7 +137,43 @@
             text-align: center;
             text-decoration: none;
             margin-left: 4%;
+            background: linear-gradient(45deg, #3a86ff, #ff6b6b);
+            padding: 2px;
         }
+        .bn60:hover {
+              transform: translateY(-2px); /* Add a slight lift effect on hover */
+              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add a shadow for depth */
+          }
+
+          .bn60 .bn60span {
+              align-items: center;
+              background: #0e0e10; /* Dark background for the inner span */
+              border-radius: 70px; /* Match the parent's border radius */
+              display: flex;
+              justify-content: center;
+              height: 100%;
+              width: 100%;
+              color: #fff; /* Ensure text color is white */
+              font-size: 1.0em; /* Add font size */
+              font-weight: 900; /* Add font weight */
+              text-decoration: none; /* Remove underline */
+              transition: background 0.5s ease; /* Smooth background transition */
+          }
+
+          .bn60:hover .bn60span {
+              background: transparent; /* Make the inner span transparent on hover */
+          }
+          .arrowd span {
+              display: block;
+              width: 1.5vw;
+              height: 1.5vw;
+              border-bottom: 5px solid white;
+              border-right: 5px solid white;
+              transform: rotate(45deg);
+              margin: -10px;
+              animation: animate 2s infinite;
+
+          }
 
         .secondary-column {
             display: flex;
@@ -143,6 +184,14 @@
         .section {
             border-top: 1px solid #444;
             padding-top: 20px;
+        }
+      
+         .secondary-column h1 {
+            border-top: 1px solid #444;
+            padding-top: 40px;
+            background: linear-gradient(45deg, #3a86ff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .section h2 {
@@ -173,24 +222,48 @@
             height: auto;
         }
         .bn61 {
-            color: #2579FF;
-            font-size: 1.0em;
-            font-weight: 900;
-            position: relative;
-            outline: none;
-            border-radius: 70px;
-            border: .2px solid #2579FF;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            height: 40px;
-            width: 90%;
-            text-align: center;
-            text-decoration: none;
-            margin-left: 4%;
-            padding-top: 10px;
-        }
+              background-image: linear-gradient(45deg, #3a86ff, #ff6b6b); /* Gradient like .bn39 */
+              border-radius: 70px; /* Keep the original border radius */
+              box-sizing: border-box;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+              height: 50px; /* Keep the original height */
+              width: 90%; /* Keep the original width */
+              text-align: center;
+              text-decoration: none;
+              margin-left: 4%; /* Keep the original margin */
+              padding: 3px; /* Remove padding-top to center content properly */
+              position: relative;
+              overflow: hidden; /* Ensure the inner span doesn't overflow */
+              transition: all 0.5s ease; /* Smooth transition for hover effects */
+          }
+
+          .bn61:hover {
+              transform: translateY(-3px); /* Add a slight lift effect on hover */
+              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add a shadow for depth */
+          }
+
+          .bn61 .bn61span {
+              align-items: center;
+              background: #0e0e10; /* Dark background for the inner span */
+              border-radius: 70px; /* Match the parent's border radius */
+              display: flex;
+              justify-content: center;
+              height: 100%;
+              width: 100%;
+              color: #fff; /* Ensure text color is white */
+              font-size: 1.0em; /* Add font size */
+              font-weight: 900; /* Add font weight */
+              text-decoration: none; /* Remove underline */
+              transition: background 0.5s ease; /* Smooth background transition */
+          }
+
+          .bn61:hover .bn61span {
+              background: transparent; /* Make the inner span transparent on hover */
+          }
       
           
         .social-icons {
@@ -219,7 +292,7 @@
             height: 120px;
             font-size: 2rem;
             font-weight: 1200;
-            padding: 6px;
+            padding: 4px;
             position: relative;
             text-decoration: none;
             width: 100%;
@@ -321,9 +394,9 @@
                 <div class="main-text">
                     <h1>I'm Ehab, a <br> Data Analysis</h1>
                     <p></br> Address: 10th of Ramadan City, Esh Sharkia. </p>
-                    <p>LinkedIn: EhabAShahat <a class="bn60" href="https://www.linkedin.com/in/ehabashahat/">➜</a></p>
-                    <p>Email: EhabAShahat@gmail.com <a class="bn60" href="mailto:EhabAShahat@gmail.com">➜</a></p>
-                    <p> Mobile: +2012 10972719<a class="bn60" href="tel:+201210972719">➜</a></p>
+                    <p>LinkedIn: EhabAShahat <a class="bn60" href="https://www.linkedin.com/in/ehabashahat/"><span class="bn60span">➜</span></a></p>
+                    <p>Email: EhabAShahat@gmail.com <a class="bn60" href="mailto:EhabAShahat@gmail.com"><span class="bn60span">➜</span></a></p>
+                    <p> Mobile: +2012 10972719<a class="bn60" href="tel:+201210972719"><span class="bn60span">➜</span></a></p>
                 </div>
                 <div class="down-arrow">    <div class="arrow">
         <span></span>
@@ -455,14 +528,14 @@ inventory accuracy and efficiency</p>
                     <h3>Google</h3>
                     <h4>GFK24A4J37DJ</h4>
                     <img src="https://ehabshahat.github.io/Portfolio/Google.jpg"  >
-                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/GFK24A4J37DJ">Check it out at coursera.org</a>
+                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/GFK24A4J37DJ"> <span class="bn61span">Check it out at coursera.org</span></a>
                 </div>
                 <div class="section">
                     <h2>IBM Data Analyst Specialization</h2>
                     <h3>IBM</h3>
                     <h4>DL6BK5ESBLFK</h4>
                     <img src="https://ehabshahat.github.io/Portfolio/IBM.jpg"  >
-                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/DL6BK5ESBLFK">Check it out at coursera.org</a>
+                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/DL6BK5ESBLFK"> <span class="bn61span">Check it out at coursera.org</span></a>
                 </div>
               
                 <div class="section">
@@ -470,14 +543,14 @@ inventory accuracy and efficiency</p>
                     <h3>Macquarie University</h3>
                     <h4>4QN4EJBSA888</h4>
                     <img src="https://ehabshahat.github.io/Portfolio/Macquarie.jpg"  >
-                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/4QN4EJBSA888">Check it out at coursera.org</a>
+                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/4QN4EJBSA888"> <span class="bn61span">Check it out at coursera.org</span></a>
                 </div>
                 <div class="section">
                     <h2>Python for Everybody Specialization (Uncompleted) </h2>
                     <h3>University of Michigan</h3>
                     <h4>VURK38ZK9AY3</h4>
                     <img src="https://ehabshahat.github.io/Portfolio/Michigan.jpg"  >
-                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/certificate/VURK38ZK9AY3">Check it out at coursera.org</a>
+                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/certificate/VURK38ZK9AY3"> <span class="bn61span">Check it out at coursera.org</span></a>
                 </div>
 
             </div>
