@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ehabs resume</title>
+    <title>Ehab's Resume</title>
     <style>
         body {
             margin: 0;
@@ -29,17 +29,32 @@
             height: auto;
             max-height: 70%;
             margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .background-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, #010104 100%);
+            pointer-events: none;
+            z-index: 1;
         }
 
         .container {
+            position: relative;
+            z-index: 2;
             display: grid;
             grid-template-columns: 60% 30%;
             align-items: center;
             max-width: 1200px;
             padding: 20px;
             gap: 10%;
-            position: relative;
         }
+
         .containera {
             display: grid;
             grid-template-columns: 60% 30%;
@@ -57,7 +72,7 @@
             width: 80%;
             border-radius: 20px;
             color: #fff;
-            margin-top: 40px; /* Ensure it is spaced from the top section */
+            margin-top: 40px;
         }
 
         .text-column {
@@ -92,35 +107,26 @@
             color: #3a86ff;
             cursor: pointer;
         }
-                
-      
-      
-      .arrow {
-          top: 50%;
-          
-          transform: translate(-50%, );
-      }
 
-      .arrow span {
-          display: block;
-          width: 1.5vw;
-          height: 1.5vw;
-          border-bottom: 5px solid white;
-          border-right: 5px solid white;
-          transform: rotate(45deg);
-          margin: -10px;
-          animation: animate 2s infinite;
-        
-      }
+        .arrow span {
+            display: block;
+            width: 1.5vw;
+            height: 1.5vw;
+            border-bottom: 5px solid white;
+            border-right: 5px solid white;
+            transform: rotate(45deg);
+            margin: -10px;
+            animation: animate 2s infinite;
+        }
 
-      .arrow span:nth-child(2) {
-          animation-delay: -0.2s;
-        
-      }
+        .arrow span:nth-child(2) {
+            animation-delay: -0.2s;
+        }
 
-      .arrow span:nth-child(3) {
-          animation-delay: -0.4s;
-      }
+        .arrow span:nth-child(3) {
+            animation-delay: -0.4s;
+        }
+
         .bn60 {
             color: #2579FF;
             font-size: 1.0em;
@@ -140,40 +146,30 @@
             background: linear-gradient(45deg, #3a86ff, #ff6b6b);
             padding: 2px;
         }
+
         .bn60:hover {
-              transform: translateY(-2px); /* Add a slight lift effect on hover */
-              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add a shadow for depth */
-          }
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
 
-          .bn60 .bn60span {
-              align-items: center;
-              background: #0e0e10; /* Dark background for the inner span */
-              border-radius: 70px; /* Match the parent's border radius */
-              display: flex;
-              justify-content: center;
-              height: 100%;
-              width: 100%;
-              color: #fff; /* Ensure text color is white */
-              font-size: 1.0em; /* Add font size */
-              font-weight: 900; /* Add font weight */
-              text-decoration: none; /* Remove underline */
-              transition: background 0.5s ease; /* Smooth background transition */
-          }
+        .bn60 .bn60span {
+            align-items: center;
+            background: #0e0e10;
+            border-radius: 70px;
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            color: #fff;
+            font-size: 1.0em;
+            font-weight: 900;
+            text-decoration: none;
+            transition: background 0.5s ease;
+        }
 
-          .bn60:hover .bn60span {
-              background: transparent; /* Make the inner span transparent on hover */
-          }
-          .arrowd span {
-              display: block;
-              width: 1.5vw;
-              height: 1.5vw;
-              border-bottom: 5px solid white;
-              border-right: 5px solid white;
-              transform: rotate(45deg);
-              margin: -10px;
-              animation: animate 2s infinite;
-
-          }
+        .bn60:hover .bn60span {
+            background: transparent;
+        }
 
         .secondary-column {
             display: flex;
@@ -185,8 +181,8 @@
             border-top: 1px solid #444;
             padding-top: 20px;
         }
-      
-         .secondary-column h1 {
+
+        .secondary-column h1 {
             border-top: 1px solid #444;
             padding-top: 40px;
             background: linear-gradient(45deg, #3a86ff, #ff6b6b);
@@ -198,11 +194,11 @@
             font-size: 1.5rem;
             margin-bottom: 10px;
         }
+
         .section h4 {
             font-size: .8rem;
             margin-bottom: 5px;
         }
-        
 
         .section p {
             font-size: 1rem;
@@ -217,55 +213,73 @@
             margin-top: 10px;
         }
 
-         .section img {
+        .image-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .image-container img {
+            display: block;
             width: 100%;
             height: auto;
         }
+
+        .image-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to bottom, transparent 0%, #1a1a1a 100%);
+            pointer-events: none;
+        }
+
         .bn61 {
-              background-image: linear-gradient(45deg, #3a86ff, #ff6b6b); /* Gradient like .bn39 */
-              border-radius: 70px; /* Keep the original border radius */
-              box-sizing: border-box;
-              color: #ffffff;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              cursor: pointer;
-              height: 50px; /* Keep the original height */
-              width: 90%; /* Keep the original width */
-              text-align: center;
-              text-decoration: none;
-              margin-left: 4%; /* Keep the original margin */
-              padding: 3px; /* Remove padding-top to center content properly */
-              position: relative;
-              overflow: hidden; /* Ensure the inner span doesn't overflow */
-              transition: all 0.5s ease; /* Smooth transition for hover effects */
-          }
+            background-image: linear-gradient(45deg, #3a86ff, #ff6b6b);
+            border-radius: 70px;
+            box-sizing: border-box;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            height: 50px;
+            width: 90%;
+            text-align: center;
+            text-decoration: none;
+            margin-left: 4%;
+            padding: 3px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
 
-          .bn61:hover {
-              transform: translateY(-3px); /* Add a slight lift effect on hover */
-              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add a shadow for depth */
-          }
+        .bn61:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
 
-          .bn61 .bn61span {
-              align-items: center;
-              background: #0e0e10; /* Dark background for the inner span */
-              border-radius: 70px; /* Match the parent's border radius */
-              display: flex;
-              justify-content: center;
-              height: 100%;
-              width: 100%;
-              color: #fff; /* Ensure text color is white */
-              font-size: 1.0em; /* Add font size */
-              font-weight: 900; /* Add font weight */
-              text-decoration: none; /* Remove underline */
-              transition: background 0.5s ease; /* Smooth background transition */
-          }
+        .bn61 .bn61span {
+            align-items: center;
+            background: #0e0e10;
+            border-radius: 70px;
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            color: #fff;
+            font-size: 1.0em;
+            font-weight: 900;
+            text-decoration: none;
+            transition: background 0.5s ease;
+        }
 
-          .bn61:hover .bn61span {
-              background: transparent; /* Make the inner span transparent on hover */
-          }
-      
-          
+        .bn61:hover .bn61span {
+            background: transparent;
+        }
+
         .social-icons {
             display: flex;
             gap: 15px;
@@ -281,9 +295,8 @@
         .social-icons a:hover {
             color: #3a86ff;
         }
-      
-      
-         .bn39 {
+
+        .bn39 {
             background-image: linear-gradient(135deg, #008aff, #86d472);
             border-radius: 6px;
             box-sizing: border-box;
@@ -296,16 +309,15 @@
             position: relative;
             text-decoration: none;
             width: 100%;
-            
             z-index: 2;
             margin-top: 20px;
-          }
+        }
 
-          .bn39:hover {
+        .bn39:hover {
             color: #fff;
-          }
+        }
 
-          .bn39 .bn39span {
+        .bn39 .bn39span {
             align-items: center;
             background: #0e0e10;
             border-radius: 6px;
@@ -314,11 +326,11 @@
             height: 100%;
             transition: background 0.5s ease;
             width: 100%;
-          }
+        }
 
-          .bn39:hover .bn39span {
+        .bn39:hover .bn39span {
             background: transparent;
-          }
+        }
 
         @media (max-width: 768px) {
             .container {
@@ -370,20 +382,20 @@
                 font-size: 1rem;
             }
         }
-      
-      @keyframes animate {
-    0% {
-        opacity: 0;
-        transform: rotate(45deg) translate(-20px, -20px);
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        transform: rotate(45deg) translate(20px, 20px);
-    }
-}
+
+        @keyframes animate {
+            0% {
+                opacity: 0;
+                transform: rotate(45deg) translate(-20px, -20px);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: rotate(45deg) translate(20px, 20px);
+            }
+        }
     </style>
 </head>
 <body>
@@ -398,12 +410,13 @@
                     <p>Email: EhabAShahat@gmail.com <a class="bn60" href="mailto:EhabAShahat@gmail.com"><span class="bn60span">➜</span></a></p>
                     <p> Mobile: +2012 10972719<a class="bn60" href="tel:+201210972719"><span class="bn60span">➜</span></a></p>
                 </div>
-                <div class="down-arrow">    <div class="arrow">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</div>
+                <div class="down-arrow">
+                    <div class="arrow">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
             </div>
 
             <!-- Right Column -->
@@ -411,7 +424,6 @@
                 <div class="section">
                     <h2>About Me</h2>
                     <p>a motivated individual passionate about data analytics, eager to apply my skills to make a meaningful impact. With a proven track record of collaboration and strong analytical abilities, I thrive in solving complex problems. I am committed to continuous learning and excited to develop my skills in a dynamic work environment.</p>
-                    
                 </div>
 
                 <div class="section">
@@ -426,189 +438,152 @@
     <!-- New Section below the current section -->
     <div class="new-section">
         <div class="containera">
-            
             <div class="secondary-column">
-              <h1 id="WorkExperience">Work Experience</h1>
+                <h1 id="WorkExperience">Work Experience</h1>
                 <div class="section">
                     <h2>Studio Helper</h2>
                     <h3>Amazon</h3>
                     <h4>Jan 2022 –  Jun 2022</h4>
-                    <p>Managed a team of 5, increasing team productivity by 20% through effective
-coaching and performance management and oversaw all activities within the
-team. Worked with multiple systems and various workgroups to gather
-necessary information and make informed decisions that created the most
-value for the company. Created and managed shift schedules, resulting in a
-85% shift coverage rate and ensuring seamless studio operations, prepared
-daily/weekly reports on team performance and email communication, providing
-key insights to senior management and driving process improvements,
-Developed and implemented new reporting processes that improved data
-accuracy and reduced reporting time by 50%, and tracked and structured
-various tasks, employees, and documents using Amazon Chime, Google
-sheets and dashboards, ensuring all team members were aligned and on track
-to meet project deadlines. Developed and implemented new document
-management processes that reduced document retrieval time by 30%.</p>
+                    <p>Managed a team of 5, increasing team productivity by 20% through effective coaching and performance management and oversaw all activities within the team. Worked with multiple systems and various workgroups to gather necessary information and make informed decisions that created the most value for the company. Created and managed shift schedules, resulting in a 85% shift coverage rate and ensuring seamless studio operations, prepared daily/weekly reports on team performance and email communication, providing key insights to senior management and driving process improvements, Developed and implemented new reporting processes that improved data accuracy and reduced reporting time by 50%, and tracked and structured various tasks, employees, and documents using Amazon Chime, Google sheets and dashboards, ensuring all team members were aligned and on track to meet project deadlines. Developed and implemented new document management processes that reduced document retrieval time by 30%.</p>
                 </div>
 
                 <div class="section">
                     <h2>TOM Specialist</h2>
                     <h3>Amazon</h3>
                     <h4>Oct 2020 -  Apr 2021</h4>
-                    <p>I worked collaboratively with various teams and systems to gather information
-and make informed decisions that created value for the company. I ensured
-compliance with safety and environmental regulations and developed new
-transportation processes that reduced costs by 15% and improved delivery
-times by 10%. I tracked and analyzed performance metrics, developed data
-reporting and tracking tools, and prepared monthly reports to communicate
-progress to senior management. Additionally, I tracked and followed up on
-supplier responsible costs and provided support to the TOM team as assigned.</p>
+                    <p>I worked collaboratively with various teams and systems to gather information and make informed decisions that created value for the company. I ensured compliance with safety and environmental regulations and developed new transportation processes that reduced costs by 15% and improved delivery times by 10%. I tracked and analyzed performance metrics, developed data reporting and tracking tools, and prepared monthly reports to communicate progress to senior management. Additionally, I tracked and followed up on supplier responsible costs and provided support to the TOM team as assigned.</p>
                 </div>
-              
-              <div class="section">
+
+                <div class="section">
                     <h2>Flow Admin</h2>
                     <h3>Amazon</h3>
                     <h4>Sep 2018 -  Oct 2019</h4>
-                    <p>I played a critical role in overseeing operations and ensuring seamless workflow. I
-was responsible for creating and implementing shift plans, maintaining reports and
-emails, distributing information to shift members and stakeholders, and organizing
-tasks and documents. By managing multiple priorities and deadlines, I was able to
-improve productivity and efficiency. Overall, my contributions helped to streamline
-workflows and improve collaboration across teams.</p>
+                    <p>I played a critical role in overseeing operations and ensuring seamless workflow. I was responsible for creating and implementing shift plans, maintaining reports and emails, distributing information to shift members and stakeholders, and organizing tasks and documents. By managing multiple priorities and deadlines, I was able to improve productivity and efficiency. Overall, my contributions helped to streamline workflows and improve collaboration across teams.</p>
                 </div>
-              
-              
-              
             </div>
             <div class="secondary-column">
-              <h1>Competitions & Skills</h1>
-              <div class="section">
+                <h1>Competitions & Skills</h1>
+                <div class="section">
                     <h2>Cubiscan Hero</h2>
                     <h3>Amazon</h3>
                     <h4>Oct 2018 – Apr 2019</h4>
-                  <p>Led a team to perform Cubiscan for over 500,000 items, achieving the highest
-number in the Middle East as part of a company-wide initiative to improve
-inventory accuracy and efficiency</p>
+                    <p>Led a team to perform Cubiscan for over 500,000 items, achieving the highest number in the Middle East as part of a company-wide initiative to improve inventory accuracy and efficiency</p>
                 </div>
                 <div class="section">
                     <h2>Technical Skills</h2>
-                    
-                  <p>• Python </br>
-                  • SQL </br>
-                  • Tableau </br>
-                  • Data Visualization </br>
-                  • Data Cleaning </br>
-                  • Microsoft Excel </br>
-                  • Spreadsheet 
-                  </p>
+                    <p>• Python </br>
+                    • SQL </br>
+                    • Tableau </br>
+                    • Data Visualization </br>
+                    • Data Cleaning </br>
+                    • Microsoft Excel </br>
+                    • Spreadsheet 
+                    </p>
                 </div>
 
                 <div class="section">
                     <h2>Soft skills</h2>
-                    
-                  <p>• Critical Thinking </br>
-                  • Communication </br>
-                  • Problem solving </br>
-                  • Project management </br>
-                  • Creativity </br>
-                  • Curiosity </br>
-                  • Time management 
-                  </p>
+                    <p>• Critical Thinking </br>
+                    • Communication </br>
+                    • Problem solving </br>
+                    • Project management </br>
+                    • Creativity </br>
+                    • Curiosity </br>
+                    • Time management 
+                    </p>
                 </div>
-                
             </div>
         </div>
     </div>
+
     <!-- New Section below the current section -->
     <div class="new-section">
         <div class="containera">
-            
             <div class="secondary-column">
-              <h1>Courses and Certifications</h1>
+                <h1>Courses and Certifications</h1>
                 <div class="section">
                     <h2>Google Data Analytics Professional</h2>
                     <h3>Google</h3>
                     <h4>GFK24A4J37DJ</h4>
-                    <img src="https://ehabshahat.github.io/Portfolio/Google.jpg"  >
-                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/GFK24A4J37DJ"> <span class="bn61span">Check it out at coursera.org</span></a>
+                    <div class="image-container">
+                        <img src="https://ehabshahat.github.io/Portfolio/Google.jpg" alt="Google Certification">
+                    </div>
+                    <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/GFK24A4J37DJ">
+                        <span class="bn61span">Check it out at coursera.org</span>
+                    </a>
                 </div>
                 <div class="section">
                     <h2>IBM Data Analyst Specialization</h2>
                     <h3>IBM</h3>
                     <h4>DL6BK5ESBLFK</h4>
-                    <img src="https://ehabshahat.github.io/Portfolio/IBM.jpg"  >
-                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/DL6BK5ESBLFK"> <span class="bn61span">Check it out at coursera.org</span></a>
+                    <div class="image-container">
+                        <img src="https://ehabshahat.github.io/Portfolio/IBM.jpg" alt="IBM Certification">
+                    </div>
+                    <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/DL6BK5ESBLFK">
+                        <span class="bn61span">Check it out at coursera.org</span>
+                    </a>
                 </div>
-              
+
                 <div class="section">
                     <h2>Excel Skills for Business Specialization</h2>
                     <h3>Macquarie University</h3>
                     <h4>4QN4EJBSA888</h4>
-                    <img src="https://ehabshahat.github.io/Portfolio/Macquarie.jpg"  >
-                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/4QN4EJBSA888"> <span class="bn61span">Check it out at coursera.org</span></a>
+                    <div class="image-container">
+                        <img src="https://ehabshahat.github.io/Portfolio/Macquarie.jpg" alt="Macquarie Certification">
+                    </div>
+                    <a class="bn61" href="https://www.coursera.org/account/accomplishments/specialization/certificate/4QN4EJBSA888">
+                        <span class="bn61span">Check it out at coursera.org</span>
+                    </a>
                 </div>
                 <div class="section">
                     <h2>Python for Everybody Specialization (Uncompleted) </h2>
                     <h3>University of Michigan</h3>
                     <h4>VURK38ZK9AY3</h4>
-                    <img src="https://ehabshahat.github.io/Portfolio/Michigan.jpg"  >
-                  <a class="bn61" href="https://www.coursera.org/account/accomplishments/certificate/VURK38ZK9AY3"> <span class="bn61span">Check it out at coursera.org</span></a>
+                    <div class="image-container">
+                        <img src="https://ehabshahat.github.io/Portfolio/Michigan.jpg" alt="Michigan Certification">
+                    </div>
+                    <a class="bn61" href="https://www.coursera.org/account/accomplishments/certificate/VURK38ZK9AY3">
+                        <span class="bn61span">Check it out at coursera.org</span>
+                    </a>
                 </div>
-
             </div>
             <div class="secondary-column">
-              <h1>Education & Internships</h1>
-              <div class="section">
+                <h1>Education & Internships</h1>
+                <div class="section">
                     <h2>Bachelor's degree, Social Work</h2>
                     <h3>Helwan University Cairo</h3>
                     <h4>2019 - 2023</h4>
-                  
                 </div>
                 <div class="section">
                     <h2>Human Resources Intern</h2>
-                     <h3>NewLife HR</h3>
+                    <h3>NewLife HR</h3>
                     <h4>May 2020 - Sep 2020</h4>
-                  <p>I demonstrated my ability to address employment relations issues effectively,
-ensuring a positive employee experience. I actively communicated with job
-applicants, informing them of their job duties, responsibilities, benefits, schedules,
-and promotion opportunities. I streamlined the onboarding process by ensuring
-that new hire paperwork was completed and processed on time, and I took
-attendance to ensure accurate record-keeping. I also worked on various HRrelated tasks such as preparing employment records for hiring, transferring,
-promoting, and terminating, and created and maintained reports and email
-communication to facilitate efficient and effective communication within the
-organization. My contributions as an HR Intern helped to enhance the overall
-effectiveness of the HR department and positively impacted the company culture. </p>
+                    <p>I demonstrated my ability to address employment relations issues effectively, ensuring a positive employee experience. I actively communicated with job applicants, informing them of their job duties, responsibilities, benefits, schedules, and promotion opportunities. I streamlined the onboarding process by ensuring that new hire paperwork was completed and processed on time, and I took attendance to ensure accurate record-keeping. I also worked on various HR-related tasks such as preparing employment records for hiring, transferring, promoting, and terminating, and created and maintained reports and email communication to facilitate efficient and effective communication within the organization. My contributions as an HR Intern helped to enhance the overall effectiveness of the HR department and positively impacted the company culture. </p>
                 </div>
-              
-              
-              <div class="section">
+
+                <div class="section">
                     <h2>Projects</h2>
                     <h3>• Google Data Analytics Capstone.</h3>
                     <h4>November, 2022</h4>
-                </br>
-                </br>
+                    </br>
+                    </br>
                     <h3>• IBM Data Analyst Capstone Project.</h3>
                     <h4>March, 2023</h4>
-                  
-                </div>
-                
-                    <a class="bn39" href="https://ehabshahat.github.io/Portfolio/projects.html" ><span class="bn39span">NEGY Transport.</span></a>
-              <div class="section">
-                    <h2>Extracurricular</h2>
-                     <h3>• Ant a2w mn elmokhadarat</h3>
-                    <h4>At Helwan University</h4>
-                  <p>Volunteer, January 2022 – April 2022</p>
-                </br>
-                </br>  
-                    
-                     <h3>• University Housing Unit</h3>
-                    <h4>At Helwan University</h4>
-                  <p>Volunteer, January 2021 – April 2021</p>
                 </div>
 
-                
-                    
-                
-                
-                
+                <a class="bn39" href="https://ehabshahat.github.io/Portfolio/projects.html"><span class="bn39span">NEGY Transport.</span></a>
+                <div class="section">
+                    <h2>Extracurricular</h2>
+                    <h3>• Ant a2w mn elmokhadarat</h3>
+                    <h4>At Helwan University</h4>
+                    <p>Volunteer, January 2022 – April 2022</p>
+                    </br>
+                    </br>
+
+                    <h3>• University Housing Unit</h3>
+                    <h4>At Helwan University</h4>
+                    <p>Volunteer, January 2021 – April 2021</p>
+                </div>
             </div>
         </div>
     </div>
